@@ -29,16 +29,20 @@ namespace pages {
 
                 // Подготовленный запрос для получения информации о вакансии
                 $stmt = $this->db->prepare( '
-           SELECT v.*, c.name AS company_name
-           FROM vacancy v
-           LEFT JOIN company c ON v.company_id = c.company_id
-           WHERE v.vacancy_id = :id
-       ' );
+                    SELECT v.*, c.name AS company_name
+                    FROM vacancy v
+                    LEFT JOIN company c ON v.company_id = c.company_id
+                    WHERE v.vacancy_id = :id
+                ' );
                 $stmt->bindParam( ':id', $vacancyId, PDO::PARAM_INT );
                 $stmt->execute();
 
                 // Если вакансия найдена, выводим информацию
                 if ( $row = $stmt->fetch( PDO::FETCH_ASSOC ) ) {
+                    ?>
+                    <input type='hidden' id='vacancyId' value='<?php echo $this->vacancyId; ?>'>
+                    <?php
+
                     echo '<div class="container-vacancies-info">';
                     echo '<h1 class="vacancy-title">' . $row[ 'description' ] . '</h1>';
                     echo '<p class="vacancy-info"><strong class="vacancy-label">Работодатель:</strong> ' . $row[ 'company_name' ] . '</p>';
@@ -47,8 +51,31 @@ namespace pages {
                     echo '<p class="vacancy-info"><strong class="vacancy-label">Место работы:</strong> ' . $row[ 'location' ] . '</p>';
                     echo '<p class="vacancy-info"><strong class="vacancy-label">Возможность удалённой работы:</strong> ' . ( $row[ 'is_remote' ] ? 'Да' : 'Нет' ) . '</p>';
                     echo '<p class="vacancy-info"><strong class="vacancy-label">Описание:</strong> ' . $row[ 'description' ] . '</p>';
-                    echo '</div>';
+
                     // Закрываем контейнер
+                    echo "<button id='openPopupBtn'>Відправити заявку</button>";
+                    echo '</div>';
+                    echo "
+                    <div id='commentPopup' class='modal'>
+                        <div class='modal-content'>
+                            <div class='modal-title'>Заявка на вакансію</div>
+                            <div>
+                                <label for='commentInput'>Роскажіть про себе:</label>
+                                <textarea id='commentInput' name='commentInput' class = 'commentInput'></textarea>
+                            </div>
+                            <div class='buttonRow'>
+                                <button type='button' id='okBtn'>Відправити</button>
+                                <button type='button' id='cancelBtn'>Відмінити</button>
+                            </div>
+                        </div>
+                    </div>
+                    ";
+
+
+
+
+
+
                     // Додавання поточного часу в кінець файлу
                     echo '<p>Поточний час: ' . date( 'Y-m-d H:i:s' ) . '</p>';
                 } else {
@@ -70,7 +97,7 @@ namespace pages {
         public function insertVacancy( $description, $company_id, $monthly_salary, $opening_hours, $location, $is_remote ) {
             try {
                 // Початок транзакції
-                $db->beginTransaction();
+                $this->db->beginTransaction();
 
                 // Підготовлений запит для вставки вакансії
                 $stmt = $this->db->prepare( 'INSERT INTO vacancy (description, company_id, monthly_salary, opening_hours, location, is_remote) VALUES (:description, :company_id, :monthly_salary, :opening_hours, :location, :is_remote)' );
