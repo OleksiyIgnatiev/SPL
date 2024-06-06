@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<vacancies>
+  <vacancy>
+    <vacancy_id>1</vacancy_id>
+    <description>Software Engineer</description>
+    <is_remote>1</is_remote>
+    <monthly_salary>8000</monthly_salary>
+    <worker_competence>JavaScript, React</worker_competence>
+    <profile_requirement>3+ years experience in frontend development</profile_requirement>
+    <language>English</language>
+    <is_blocked>0</is_blocked>
+    <creation_date>2024-05-21 10:03:19</creation_date>
+    <is_closed>0</is_closed>
+    <location/>
+    <company_id>1</company_id>
+  </vacancy>
+  <vacancy>
+    <vacancy_id>3</vacancy_id>
+    <description>Content Writer</description>
+    <is_remote>1</is_remote>
+    <monthly_salary>3000</monthly_salary>
+    <worker_competence>SEO, Content Creation</worker_competence>
+    <profile_requirement>1+ year experience in content writing</profile_requirement>
+    <language>English</language>
+    <is_blocked>0</is_blocked>
+    <creation_date>2024-05-21 10:03:19</creation_date>
+    <is_closed>0</is_closed>
+    <location/>
+    <company_id>3</company_id>
+  </vacancy>
+  <vacancy>
+    <vacancy_id>6</vacancy_id>
+    <description>Hello</description>
+    <is_remote>1</is_remote>
+    <monthly_salary>300</monthly_salary>
+    <worker_competence>Antonio</worker_competence>
+    <profile_requirement>Xadad</profile_requirement>
+    <language>English</language>
+    <is_blocked>0</is_blocked>
+    <creation_date>2024-05-21 09:56:14</creation_date>
+    <is_closed>0</is_closed>
+    <location>DADADA</location>
+    <company_id>1</company_id>
+  </vacancy>
+  <vacancy>
+    <vacancy_id>9</vacancy_id>
+    <description>Dadadad</description>
+    <is_remote>1</is_remote>
+    <monthly_salary>300</monthly_salary>
+    <worker_competence>Adadadada</worker_competence>
+    <profile_requirement>Ssadadad</profile_requirement>
+    <language>Dadadada</language>
+    <is_blocked>0</is_blocked>
+    <creation_date>2024-05-21 11:05:57</creation_date>
+    <is_closed>0</is_closed>
+    <location>ADADADADADADADADA</location>
+    <company_id>3</company_id>
+  </vacancy>
+</vacancies>

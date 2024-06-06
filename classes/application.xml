@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database>
+    <applications>
+        <application>
+            <application_id>1</application_id>
+            <worker_id>1</worker_id>
+            <vacancy_id>1</vacancy_id>
+            <description>Application Description</description>
+            <creation_date>2024-05-30T00:00:00Z</creation_date>
+            <messages>
+                <message>
+                    <message_id>1</message_id>
+                    <application_id>1</application_id>
+                    <text>Message text example</text>
+                    <is_read>0</is_read>
+                    <sender>John Doe</sender>
+                    <creation_date>2024-05-30T00:00:00Z</creation_date>
+                </message>
+            </messages>
+        </application>
+    </applications>
+</database>

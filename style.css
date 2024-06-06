@@ -1,0 +1,402 @@
+* {
+    box-sizing: border-box;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+form{
+    display: inline;
+}
+
+.logout-button {
+    background:#333;
+    color: #ccc;
+}
+
+
+.logout-container {
+    margin-right: 10px;
+    display: inline;
+    text-align: right;
+}
+
+
+.navcontainer{
+    display: inline;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #333;
+    /* Dark background color */
+    padding: 20px 0;
+    /* Add padding */
+    text-align: center;
+    /* Center align content */
+}
+
+/* Styles for logo */
+.logo {
+    color: #fff;
+    /* White text color */
+    text-decoration: none;
+    /* Remove underline */
+    font-size: 24px;
+    /* Set font size */
+    font-weight: bold;
+    /* Set font weight */
+}
+
+/* Styles for navigation links */
+nav {
+    display: flex;
+    margin-top: 10px;   
+    justify-content: space-between;
+    /* Add margin */
+}
+
+nav a {
+    color: #ccc;
+    /* Light gray text color */
+    text-decoration: none;
+    /* Remove underline */
+    margin: 0 10px;
+    /* Add margin between links */
+    transition: color 0.3s;
+    /* Smooth color transition */
+}
+
+nav a:hover {
+    color: #fff;
+    /* Change text color on hover */
+}
+
+/* Active link style */
+nav a.active {
+    color: #fff;
+    /* White text color for active link */
+}
+
+
+/* Styles for footer */
+footer {
+    background-color: #333;
+    /* Dark background color */
+    color: #fff;
+    /* White text color */
+    padding: 30px 0;
+    position: relative;
+    bottom: 0;
+    /* Прив'язуємо футер до нижнього краю вікна */
+    width: 100%;
+    /* Розтягуємо футер на всю ширину */
+
+
+}
+
+/* Styles for footer sections */
+.footer-wrapper {
+    display: flex;
+    /* Use flexbox for layout */
+    justify-content: space-around;
+    /* Distribute sections evenly */
+    max-width: 1200px;
+    /* Limit maximum width */
+    margin: 0 auto;
+    /* Center align content */
+}
+
+.footer-section {
+    width: 30%;
+    /* Set width for each section */
+}
+
+/* Styles for footer headings */
+.footer-section h3 {
+    margin-bottom: 10px;
+    /* Add space below heading */
+}
+
+/* Styles for footer links */
+.footer-section ul {
+    list-style-type: none;
+    /* Remove default list styles */
+    padding: 0;
+    /* Remove default padding */
+}
+
+.footer-section ul li {
+    margin-bottom: 5px;
+    /* Add space between list items */
+}
+
+.footer-section ul li a {
+    color: #ccc;
+    /* Light gray text color */
+    text-decoration: none;
+    /* Remove underline */
+}
+
+.footer-section ul li a:hover {
+    color: #fff;
+    /* Change text color on hover */
+}
+
+/* Styles for newsletter form */
+.footer-section form input[type="email"] {
+    width: 100%;
+    /* Set input width to 100% */
+    padding: 8px;
+    /* Add padding */
+    margin-bottom: 10px;
+    /* Add space below input */
+}
+
+.footer-section form button {
+    width: 100%;
+    /* Set button width to 100% */
+    padding: 8px;
+    /* Add padding */
+    background-color: #555;
+    /* Dark gray button background color */
+    color: #fff;
+    /* White text color */
+    border: none;
+    /* Remove border */
+    cursor: pointer;
+    /* Change cursor to pointer on hover */
+}
+
+.footer-section form button:hover {
+    background-color: #444;
+    /* Darken button background color on hover */
+}
+
+/* Styles for copyright */
+.copyright {
+    text-align: center;
+    /* Center align content */
+    margin-top: 20px;
+    /* Add margin at the top */
+}
+
+/* ======vacancies__row */
+a {
+    color: #000;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    padding: 40px 0;
+}
+
+.container {
+    width: 1200px;
+}
+
+.vacancies__row {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    row-gap: 20px;
+
+}
+
+.page__title {
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 32px;
+    color: #232323;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.vacancie_wraper{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+.vacancie {
+    width: 100%;
+    height: 60px;
+    border: 1px solid #838383;
+    border-radius: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.vacancie .vacancie__title {
+    text-decoration: none;
+    width: 100%;
+    text-align: center;
+
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 32px;
+    color: #000;
+}
+
+/* =================================== */
+
+body.vacancies-info {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+}
+
+.container-vacancies-info {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1.vacancy-title {
+    color: #333;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+p.vacancy-info {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+strong.vacancy-label {
+    font-weight: bold;
+}
+
+a.vacancy-link {
+    color: #007bff;
+    text-decoration: none;
+}
+
+a.vacancy-link:hover {
+    text-decoration: underline;
+}
+
+/* =============== */
+.modal {
+
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px;
+/*     display: flex; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.modal-title {
+    text-align: center;
+    font-size: 22px;
+
+}
+
+#vacancyForm {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+    row-gap: 30px;
+}
+
+#vacancyForm label {
+
+    font-family: "Montserrat", sans-serif;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 18px;
+    /* or 100% */
+
+    color: #232323;
+
+
+}
+
+#vacancyForm>div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#vacancyForm input,
+#vacancyForm textarea,
+#vacancyForm select
+ {
+    width: 330px;
+    margin-left: auto;
+    height: 35px;
+}
+
+.buttonRow {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 20px;
+}
+
+.buttonRow>button {
+    border: none;
+    font-size: 20px;
+
+}
+
+button{
+    cursor: pointer;
+}
+
+.deleteVacancyBtn{
+    width: 100px;
+}

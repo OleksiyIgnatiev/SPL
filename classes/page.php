@@ -1,0 +1,135 @@
+<?php
+
+namespace pages {
+
+    use SQLite3;
+    use Exception;
+    use DateTime;
+    use PDO;
+
+    class Page
+    {
+
+        public function displayHeader()
+        {
+            echo '
+            <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Сайт</title>
+            <link rel="stylesheet" href="../style.css">
+            </head>
+            <header>
+                <div class="wrap-logo">
+                    <a href="/" class="logo">WorkStream</a>
+                </div>
+                <nav>
+                <div class = "navcontainer">
+                    <a class="active" href="/">Головна</a>
+                    <a href="/vacancies">Вакансії</a>
+                    <a href="/donat">Підтримати проект</a>
+                    <a href="/block3task8">Завдання 8 блок 3</a>
+                    <a href="/VacanciesXML">VacanciesXML</a>
+                    <a href="/notification">Повідомлення</a>
+                    <a href="/TestXML">TestXML</a>
+                    <a href="/Chat">Chat</a>
+                </div>';
+
+                    echo '<div class="logout-container">';
+                    if(isset($_COOKIE['login'])) {
+                        $login = $_COOKIE['login'];
+                        echo "<a href=\"/Profile\">Профіль $login</a>";
+                        echo "<form action=\"\" method=\"post\">
+                                <input type=\"submit\" name=\"logout\" value=\"Розлогінитися\" class=\"logout-button\">
+                              </form>";
+                    } else {
+                        echo '<a href="/regist">Реєстрація</a>
+                              <a href="/login">Логін</a>';
+                    }
+                    echo '</div>';
+                    
+
+            echo '
+                </nav>
+            </header>';
+
+            // Обработка разлогинивания
+            if (isset($_POST['logout'])) {
+                // Удаление куки 'login'
+                if (isset($_COOKIE['login'])) {
+                    setcookie('login', '', time() - 3600, '/');
+                }
+
+                // Удаление куки 'type'
+                if (isset($_COOKIE['type'])) {
+                    setcookie('type', '', time() - 3600, '/');
+                }
+
+                // Перенаправление на главную страницу или любую другую страницу
+                header("Location: index.php"); // Измените index.php на путь к вашей главной странице, если нужно
+            }
+        }
+
+
+
+        public function displayBody()
+        {
+            echo '<main>';
+            echo '<div class = "container">';
+            $this->displayBodyContent();
+            echo '</div>';
+            echo '</main>';
+        }
+
+        public function displayFooter()
+        {
+            echo '
+        <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Сайт</title>
+        <link rel="stylesheet" href="style.css">
+        </head>
+        <footer>
+        <div class="footer-wrapper">
+            <div class="footer-section">
+                <h3>Контакти</h3>
+                <p>Телефон: +380681239070</p>
+                <p>Email: info@jobexchange.com
+                </p>
+                <p>Адреса: вул. Науки, 14, м. Харків
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3>Корисні посилання</h3>
+                <ul>
+                    <li><a href="#home">Головна</a></li>
+                    <li><a href="#about">Про нас</a></li>
+                    <li><a href="#contact">Контакти</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Підписатися на розсилку</h3>
+                <form action="#" method="post">
+                    <input type="email" name="email" placeholder="Електронна пошта">
+                    <button type="submit">Підписатися</button>
+                </form>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 WorkStream Усі права захищені.</p>
+        </div>
+        </footer>
+        <script src="/assets/js/vacancies.js"></script>
+        ';
+        }
+
+        protected function displayBodyContent()
+        {
+
+        }
+
+    }
+}
+
+?>
