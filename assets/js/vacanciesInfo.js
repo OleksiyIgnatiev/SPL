@@ -9,6 +9,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
         commentModal.style.display = "block";
     });
 
+    // Функция для получения значения куки по имени
+    function getCookie(name) {
+        let matches = document.cookie.match(new RegExp(
+            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+        ));
+        return matches ? decodeURIComponent(matches[1]) : undefined;
+    }
+
+    var userId = getCookie('user_id'); // Получаем user_id из куки
+
     // Обработчик для кнопки "OK"
     var okBtn = document.getElementById("okBtn");
     okBtn.addEventListener('click', function () {
@@ -17,7 +27,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Формируем объект данных для отправки на сервер
         var data = {
             vacancy_id: vacancyId, // Передаем vacancy_id
-            description: commentInput
+            description: commentInput,
+            user_id: userId // Передаем user_id
             // Добавьте остальные данные, если необходимо
         };
 

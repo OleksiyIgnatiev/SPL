@@ -11,15 +11,15 @@ try {
     // Дополнительный вывод для отладки
     error_log(print_r($data, true));
 
-    if (/*isset($data['worker_id']) && */isset($data['vacancy_id']) && isset($data['description'])) {
-        $worker_id = 1;
+    if (isset($data['user_id']) && isset($data['vacancy_id']) && isset($data['description'])) {
+        $user_id = $data['user_id'];
         $vacancy_id = $data['vacancy_id'];
         $description = $data['description'];
 
-        $sql = "INSERT INTO application (worker_id, vacancy_id, description) VALUES (:worker_id, :vacancy_id, :description)";
+        $sql = "INSERT INTO application (worker_id, vacancy_id, description) VALUES (:user_id, :vacancy_id, :description)";
 
         $stmt = $db->prepare($sql);
-        $stmt->bindParam(':worker_id', $worker_id, PDO::PARAM_INT);
+        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stmt->bindParam(':vacancy_id', $vacancy_id, PDO::PARAM_INT);
         $stmt->bindParam(':description', $description, PDO::PARAM_STR);
 

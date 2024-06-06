@@ -121,7 +121,7 @@ namespace pages {
         </div>
         </footer>
         <script src="/assets/js/vacancies.js"></script>
-        <script src="/assets/js/vacancies.js"></script>
+        <script src="/assets/js/vacanciesInfo.js"></script>
         ';
         }
 
