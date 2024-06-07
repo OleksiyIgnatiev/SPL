@@ -62,10 +62,10 @@ namespace pages {
         public function displayBodyContent(): void
         {
 
-            if ($_COOKIE['type'] == 'user')
-                echo "<div class = 'page__title'>Вакансії</div>";
-            else {
+            if ($_COOKIE['type'] == 'company')
                 echo "<div class = 'page__title'>Вакансії <button id = 'addVacancyBtn'>Додати вакансію</button></div>";
+            else {
+                echo "<div class = 'page__title'>Вакансії</div>";
             }
             echo "<div class = 'vacancies__row'> ";
             foreach ($this->vacancies as $vacancy) {
@@ -78,10 +78,13 @@ namespace pages {
                     
                 </a>
                 ";
-                if ($_COOKIE['type'] !== 'user')
+                if ($_COOKIE['type'] == 'company') {
+
+
                     echo "<button class='vacancie_button' data-id='{$vacancy['vacancy_id']}'>Видалити</button>";
-                if ($_COOKIE['type'] !== 'user')
+
                     echo "<button class='vacancie_button' id = 'editVacancyButton'data-id='{$vacancy['vacancy_id']}'>Редагувати</button>";
+                }
                 echo "
        
                 </div>
