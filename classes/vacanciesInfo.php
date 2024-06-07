@@ -56,23 +56,28 @@ namespace pages {
                     // Проверка куки и отображение кнопки в зависимости от типа пользователя
                     if ($_COOKIE['type'] !== 'company') {
                         echo "<button id='openPopupBtn'>Відправити заявку</button>";
-                    }
-                    echo '</div>';
-                    echo "
-                    <div id='commentPopup' class='modal'>
-                        <div class='modal-content'>
-                            <div class='modal-title'>Заявка на вакансію</div>
-                            <div>
-                                <label for='commentInput'>Роскажіть про себе:</label>
-                                <textarea id='commentInput' name='commentInput' class = 'commentInput'></textarea>
-                            </div>
-                            <div class='buttonRow'>
-                                <button type='button' id='okBtn'>Відправити</button>
-                                <button type='button' id='cancelBtn'>Відмінити</button>
+                        echo '</div>';
+                        echo "
+                        <div id='commentPopup' class='modal'>
+                            <div class='modal-content'>
+                                <div class='modal-title'>Заявка на вакансію</div>
+                                <div>
+                                    <label for='commentInput'>Роскажіть про себе:</label>
+                                    <textarea id='commentInput' name='commentInput' class = 'commentInput'></textarea>
+                                </div>
+                                <div class='buttonRow'>
+                                    <button type='button' id='okBtn'>Відправити</button>
+                                    <button type='button' id='cancelBtn'>Відмінити</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    ";
+                        ";
+                    }
+                    else{
+                        echo '</div>';
+                    }
+
+                    
                     
                     // Додавання поточного часу в кінець файлу
                     echo '<p>Поточний час: ' . date( 'Y-m-d H:i:s' ) . '</p>';
