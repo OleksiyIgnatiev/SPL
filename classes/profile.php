@@ -11,7 +11,8 @@ namespace pages {
 
     class ProfilePage extends Page
     {
-
+       
+        private $specifications;
         private $database_file = 'lw1.db';
         private $conn;
 
@@ -22,7 +23,8 @@ namespace pages {
         public function __construct()
         {
             $this->conn = new SQLite3($this->database_file);
-       
+            $this->specifications = require __DIR__ . '\constants\specifications.php';
+
         }
 
 
@@ -53,8 +55,13 @@ namespace pages {
         private function displayBodyToUser(): void
         {
             $this->getUser();
+            echo "<div class = 'profile-page'>";
             echo "<div class ='page__title'>Профіль користувача ".$this->user['fullname']."</div>";
-            echo "<div class ='page__title'>Профіль користувача ".$this->user['fullname']."</div>";
+            echo "<div class ='text' >Електронна пошта: <span>".$this->user['email']." </span></div>";
+            echo "<div class ='text' >Номер телефону: <span>".$this->user['phone_number']."</span></div>";
+            echo "<div class ='text' >Номер телефону: <span>". $this-> specifications[$this->user['specialty']]."</span></div>";
+            echo "<div class ='text' >Аккаунт було ствоерно: <span>". $this->user['creation_date']."</span></div>"; 
+            echo '</div>';
         }
 
         private function displayBodyToCompany(): void
