@@ -427,6 +427,19 @@ button {
     width: 100%;
 }
 
+#inviteBtn{
+    font-family: "Montserrat", sans-serif;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    background-color: #fefefe;
+    margin: 1% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 100%;
+}
+
 .text {
     font-family: "Poppins", sans-serif;
     font-style: normal;
