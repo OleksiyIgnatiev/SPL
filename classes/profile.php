@@ -31,7 +31,7 @@ namespace pages {
 
         private function getUser(): void
         {
-            $stmt = $this->conn->prepare('SELECT user_id, fullname, email,, phone_number, specialty, is_blocked, creation_date FROM user WHERE user_id = :user_id');
+            $stmt = $this->conn->prepare('SELECT user_id, fullname, email, phone_number, specialty, is_blocked, creation_date FROM user WHERE user_id = :user_id');
             $stmt->bindValue(':user_id', $_COOKIE['user_id'], SQLITE3_INTEGER);
             $result = $stmt->execute();
     

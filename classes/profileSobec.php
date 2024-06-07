@@ -66,7 +66,7 @@ namespace pages {
                 echo "<div class='text'>Номер телефону: <span>" . htmlspecialchars($this->user['phone_number']) . "</span></div>";
                 echo "<div class='text'>Спеціальність: <span>" . htmlspecialchars($this->specifications[$this->user['specialty']]) . "</span></div>";
                 echo "<div class='text'>Аккаунт було створено: <span>" . htmlspecialchars($this->user['creation_date']) . "</span></div>"; 
-                if ($_COOKIE['type'] !== 'company') {
+                if ($_COOKIE['type'] == 'company') {
                     echo "<button id='inviteBtn'>Відправити запрошення</button>";
                     echo '</div>';
                     echo "
