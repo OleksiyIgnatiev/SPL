@@ -46,17 +46,19 @@ namespace pages {
                     }
                 } 
                 else {
-                    $stmt = $conn->prepare("SELECT password FROM company WHERE name = :fullname");
+                    $stmt = $conn->prepare("SELECT company_id, password FROM company WHERE name = :fullname");
                     $stmt->bindValue(':fullname', $fullname, SQLITE3_TEXT);
                     $result = $stmt->execute();
 
                     if ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                        $user_id = $row["company_id"];
                         $hash = $row["password"];
 
                         if(password_verify($password, $hash)) {
                             echo 'Данні введено правильно';
-                            setcookie('login', $fullname, time() + 86400, "/");
-                            setcookie('type', 'company', time() + 86400, "/");
+                            setcookie('login', $fullname, time() + 3600, "/");
+                            setcookie('company_id', $user_id, time() + 3600, "/");
+                            setcookie('type', 'company', time() + 3600, "/");
                             
                             header("Location: index.php");
                             exit(); // добавляем exit() после header

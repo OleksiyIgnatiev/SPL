@@ -67,6 +67,11 @@ namespace pages {
                     setcookie('user_id', '', time() - 3600, '/');
                 }
 
+                // Удаление куки 'company_id'
+                if (isset($_COOKIE['company_id'])) {
+                    setcookie('company_id', '', time() - 3600, '/');
+                }
+
                 // Удаление куки 'login'
                 if (isset($_COOKIE['login'])) {
                     setcookie('login', '', time() - 3600, '/');
