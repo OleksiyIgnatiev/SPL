@@ -5,14 +5,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var span = document.getElementsByClassName("close")[0];
     var closeBtn = document.getElementById("closeBtn");
     var submitBtn = document.getElementById('submitBtn');
+
     btn.addEventListener('click', function (event) {
         event.preventDefault();
+        submitBtn.dataset.mode = 'create'
         console.log(modal)
         modal.style.display = "block";
     });
 
-    closeBtn.addEventListener('click', function () {
+    closeBtn.addEventListener('click',  ()=> {
         modal.style.display = "none";
+        console.log('none')
+
     });
 
     window.addEventListener('click', function (event) {
@@ -23,6 +27,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     submitBtn.addEventListener('click', function (event) {
         event.preventDefault();
+
         var form = document.getElementById('vacancyForm');
         var formData = new FormData(form);
         var data = {};
@@ -46,7 +51,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
         console.log('Sending data:', data);  // Виведення даних перед відправленням
 
-        fetch('/controllers/add_vacancy_api.php', {
+        fetch(`/controllers/${submitBtn.dataset.mode == 'create' ? 'add_vacancy_api.php' : 'edit_vacancy_api.php'}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -73,8 +78,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
             });
     });
 
+
     document.querySelectorAll('.deleteVacancyBtn').forEach(button => {
         button.addEventListener('click', function () {
+            console.log('1212')
             var vacancyId = this.getAttribute('data-id');
             if (confirm('Ви впевнені, що хочете видалити цю вакансію?')) {
                 fetch('/controllers/delete_vacancy_api.php', {

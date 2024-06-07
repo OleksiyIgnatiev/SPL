@@ -79,8 +79,7 @@ namespace pages {
                 </a>
                 ";
                 if (isset($_COOKIE['type']) && $_COOKIE['type'] == 'company') {
-                    echo "<button class='vacancie_button' data-id='{$vacancy['vacancy_id']}'>Видалити</button>";
-                    echo "<button class='vacancie_button' id='editVacancyButton' data-id='{$vacancy['vacancy_id']}'>Редагувати</button>";
+                    echo "<button class='deleteVacancyBtn' data-id='{$vacancy['vacancy_id']}'>Видалити</button>";
                 }
                 echo "
        
