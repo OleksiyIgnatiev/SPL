@@ -36,24 +36,24 @@ namespace pages {
 
         private function getVacancies(): void
         {
-            if ($_COOKIE['type'] == 'user') {
-                $result = $this->conn->query('SELECT v.*, c.name AS company_name FROM vacancy v LEFT JOIN company c ON v.company_id = c.company_id WHERE v.is_closed =0');
-                while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
-                    $this->vacancies[] = $row;
-                }
-            } else {
+            if (isset($_COOKIE['type']) && $_COOKIE['type'] == 'company') {
                 $company_id = $_COOKIE['company_id'];
-
+            
                 // Подготовка и выполнение запроса с использованием параметров
                 $stmt = $this->conn->prepare('SELECT v.*, c.name AS company_name FROM vacancy v LEFT JOIN company c ON v.company_id = c.company_id WHERE v.company_id = :company_id');
                 $stmt->bindValue(':company_id', $company_id, SQLITE3_INTEGER);
                 $result = $stmt->execute();
-
+            
                 while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                     $this->vacancies[] = $row;
                 }
-
+            } else {
+                $result = $this->conn->query('SELECT v.*, c.name AS company_name FROM vacancy v LEFT JOIN company c ON v.company_id = c.company_id WHERE v.is_closed = 0');
+                while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                    $this->vacancies[] = $row;
+                }
             }
+            
 
         }
 
@@ -61,12 +61,12 @@ namespace pages {
 
         public function displayBodyContent(): void
         {
-
-            if ($_COOKIE['type'] == 'company')
-                echo "<div class = 'page__title'>Вакансії <button id = 'addVacancyBtn'>Додати вакансію</button></div>";
-            else {
-                echo "<div class = 'page__title'>Вакансії</div>";
+            if (isset($_COOKIE['type']) && $_COOKIE['type'] == 'company') {
+                echo "<div class='page__title'>Вакансії <button id='addVacancyBtn'>Додати вакансію</button></div>";
+            } else {
+                echo "<div class='page__title'>Вакансії</div>";
             }
+            
             echo "<div class = 'vacancies__row'> ";
             foreach ($this->vacancies as $vacancy) {
                 echo "
@@ -78,12 +78,9 @@ namespace pages {
                     
                 </a>
                 ";
-                if ($_COOKIE['type'] == 'company') {
-
-
+                if (isset($_COOKIE['type']) && $_COOKIE['type'] == 'company') {
                     echo "<button class='vacancie_button' data-id='{$vacancy['vacancy_id']}'>Видалити</button>";
-
-                    echo "<button class='vacancie_button' id = 'editVacancyButton'data-id='{$vacancy['vacancy_id']}'>Редагувати</button>";
+                    echo "<button class='vacancie_button' id='editVacancyButton' data-id='{$vacancy['vacancy_id']}'>Редагувати</button>";
                 }
                 echo "
        
