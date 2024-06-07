@@ -11,17 +11,18 @@ namespace pages {
     {
 
         public function displayHeader() {
-            //чтобы видеть что у нас в куки
             echo '<pre>';
             print_r($_COOKIE);
             echo '</pre>';
+            // Получаем тип пользователя из куки
+            $userType = isset($_COOKIE['type']) ? $_COOKIE['type'] : '';
         
             echo '
             <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Сайт</title>
-            <link rel="stylesheet" href="../style.css">
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>Сайт</title>
+                <link rel="stylesheet" href="../style.css">
             </head>
             <header>
                 <div class="header-content">
@@ -33,7 +34,14 @@ namespace pages {
                     <nav>
                         <div class="navcontainer">
                             <a class="nav-item active" href="/">Головна</a>
-                            <a class="nav-item" href="/vacancies">Вакансії</a>
+                            <a class="nav-item" href="/vacancies">Вакансії</a>';
+                            
+                            // Проверяем тип пользователя и отображаем или скрываем пункт "Заявки"
+                            if ($userType === 'company') {
+                                echo '<a class="nav-item" href="/Summary">Заявки</a>';
+                            }
+        
+                            echo '
                             <a class="nav-item" href="/donat">Підтримати проект</a>
                             <a class="nav-item" href="/block3task8">Завдання 8 блок 3</a>
                             <a class="nav-item" href="/VacanciesXML">VacanciesXML</a>
@@ -86,6 +94,7 @@ namespace pages {
                 header("Location: index.php"); // Измените index.php на путь к вашей главной странице, если нужно
             }
         }
+        
         
         
 
