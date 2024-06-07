@@ -137,13 +137,15 @@ CREATE TABLE IF NOT EXISTS company (
             );
 
             CREATE TABLE IF NOT EXISTS application (
-                application_id INT PRIMARY KEY,
-                worker_id INT NOT NULL,
-                vacancy_id INT NOT NULL,
-                description TEXT,
-                creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (worker_id) REFERENCES user(user_id),
-                FOREIGN KEY (vacancy_id) REFERENCES vacancy(vacancy_id)
+                application_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    worker_id INT NOT NULL,
+    vacancy_id INT NOT NULL,
+    company_id INT NOT NULL,
+    description TEXT,
+    creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (worker_id) REFERENCES user (user_id),
+    FOREIGN KEY (vacancy_id) REFERENCES vacancy (vacancy_id),
+    FOREIGN KEY (company_id) REFERENCES company (company_id)
             );
 
             CREATE TABLE IF NOT EXISTS message (
@@ -186,13 +188,14 @@ CREATE TABLE IF NOT EXISTS company (
         ' );
             }
 
-            if ( $this->isTableEmpty( 'application' ) ) {
-                $this->conn->exec( '
-            INSERT INTO application (application_id, worker_id, vacancy_id, description) VALUES
-            (1, 1, 1, "I am very interested in this software engineer position."),
-            (2, 2, 2, "Looking forward to contributing my data analysis skills to your company."),
-            (3, 3, 3, "I have a passion for writing and believe I would be a great fit for this role.");
-        ' );
+            if ($this->isTableEmpty('application')) {
+                $this->conn->exec('
+                    INSERT INTO application (application_id, worker_id, vacancy_id, company_id, description) VALUES
+                    (1, 1, 1, 1, "I am very interested in this software engineer position."),
+                    (2, 2, 2, 1, "Looking forward to contributing my data analysis skills to your company."),
+                    (3, 3, 3, 1, "I have a passion for writing and believe I would be a great fit for this role.");
+                ');
+            
             }
 
             if ( $this->isTableEmpty( 'message' ) ) {
