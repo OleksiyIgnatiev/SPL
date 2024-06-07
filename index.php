@@ -51,10 +51,12 @@ switch ($request) {
         if (preg_match('#^/vacancie/(\d+)$#', $request, $matches)) {
             $vacancieId = $matches[1];
             require __DIR__ . '/views/vacancie.php';
-        } 
-        else if(preg_match('#^/profileS/(\d+)$#', $request, $matches)) {
+        } else if(preg_match('#^/profileS/(\d+)$#', $request, $matches)) {
             $applicationId = $matches[1];
             require __DIR__ . '/views/profileS.php';
+        }
+        else if (preg_match('#^/vacancies\?search=#', $request, $matches)) {
+            require __DIR__ . '/views/vacancies.php';
         }
         else {
             require __DIR__ . '/views/home.php';
