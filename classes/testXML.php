@@ -69,9 +69,11 @@ namespace pages {
                     $content = call_user_func($GLOBALS['tag_handlers'][$tag], $tag, $content);
                 } elseif (isset($GLOBALS['end_tag_handlers'][$tag])) {
                     $content = call_user_func($GLOBALS['end_tag_handlers'][$tag], $tag, $content);
-                } elseif ($GLOBALS['text_content_handler']) {
-                    $content = call_user_func(__NAMESPACE__ . '\\process_text_content', $content);
+                } elseif ($this->text_content_handler) {
+                    $content = $this->{$this->text_content_handler}($content);
+
                 }
+                
     
                 // Додавання до HTML-таблиці
                 $html_table .= "<tr><td>$tag</td><td>$content</td></tr>";
