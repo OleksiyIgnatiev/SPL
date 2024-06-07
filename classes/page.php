@@ -10,14 +10,12 @@ namespace pages {
     class Page
     {
 
-        public function displayHeader()
-        {
+        public function displayHeader() {
             //чтобы видеть что у нас в куки
             echo '<pre>';
             print_r($_COOKIE);
-            echo $_COOKIE['type'];
             echo '</pre>';
-
+        
             echo '
             <head>
             <meta charset="UTF-8">
@@ -26,66 +24,70 @@ namespace pages {
             <link rel="stylesheet" href="../style.css">
             </head>
             <header>
-                <div class="wrap-logo">
-                    <a href="/" class="logo">WorkStream</a>
-                </div>
-                <nav>
-                <div class = "navcontainer">
-                    <a class="active" href="/">Головна</a>
-                    <a href="/vacancies">Вакансії</a>
-                    <a href="/donat">Підтримати проект</a>
-                   <!-- <a href="/block3task8">Завдання 8 блок 3</a>
-                    <a href="/VacanciesXML">VacanciesXML</a>
-                    <a href="/notification">Повідомлення</a>
-                    <a href="/TestXML">TestXML</a>
-                    <a href="/Chat">Chat</a> --!>
-                </div>';
-
-                    echo '<div class="logout-container">';
-                    if(isset($_COOKIE['login'])) {
-                        $login = $_COOKIE['login'];
-                        echo "<a href=\"/profile\">Профіль $login</a>";
-                        echo "<form action=\"\" method=\"post\">
-                                <input type=\"submit\" name=\"logout\" value=\"Розлогінитися\" class=\"logout-button\">
-                              </form>";
-                    } else {
-                        echo '<a href="/regist">Реєстрація</a>
-                              <a href="/login">Логін</a>';
-                    }
-                    echo '</div>';
-                    
-
+                <div class="header-content">
+                    <div class="wrap-logo">
+                        <a href="/" class="logo">
+                            <img src="assets/images/Логотип_ДСЗУ.png" alt="WorkStream Logo">
+                        </a>
+                    </div>
+                    <nav>
+                        <div class="navcontainer">
+                            <a class="nav-item active" href="/">Головна</a>
+                            <a class="nav-item" href="/vacancies">Вакансії</a>
+                            <a class="nav-item" href="/donat">Підтримати проект</a>
+                            <a class="nav-item" href="/block3task8">Завдання 8 блок 3</a>
+                            <a class="nav-item" href="/VacanciesXML">VacanciesXML</a>
+                            <a class="nav-item" href="/notification">Повідомлення</a>
+                            <a class="nav-item" href="/TestXML">TestXML</a>
+                            <a class="nav-item" href="/Chat">Chat</a>
+                        </div>';
+        
+            echo '<div class="logout-container">';
+            if (isset($_COOKIE['login'])) {
+                $login = $_COOKIE['login'];
+                echo "<a href=\"/profile\">Профіль $login</a>";
+                echo "<form action=\"\" method=\"post\">
+                        <input type=\"submit\" name=\"logout\" value=\"Розлогінитися\" class=\"logout-button\">
+                      </form>";
+            } else {
+                echo '<a href="/regist">Реєстрація</a>
+                      <a href="/login">Логін</a>';
+            }
+            echo '</div>';
+        
             echo '
-                </nav>
+                    </nav>
+                </div>
             </header>';
-
+        
             // Обработка разлогинивания
             if (isset($_POST['logout'])) {
-
                 // Удаление куки 'user_id'
                 if (isset($_COOKIE['user_id'])) {
                     setcookie('user_id', '', time() - 3600, '/');
                 }
-
+        
                 // Удаление куки 'company_id'
                 if (isset($_COOKIE['company_id'])) {
                     setcookie('company_id', '', time() - 3600, '/');
                 }
-
+        
                 // Удаление куки 'login'
                 if (isset($_COOKIE['login'])) {
                     setcookie('login', '', time() - 3600, '/');
                 }
-
+        
                 // Удаление куки 'type'
                 if (isset($_COOKIE['type'])) {
                     setcookie('type', '', time() - 3600, '/');
                 }
-
+        
                 // Перенаправление на главную страницу или любую другую страницу
                 header("Location: index.php"); // Измените index.php на путь к вашей главной странице, если нужно
             }
         }
+        
+        
 
 
 
