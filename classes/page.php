@@ -36,6 +36,10 @@ namespace pages {
                             <a class="nav-item" href="/vacancies">Вакансії</a>
                             <a class="nav-item" href="/donat">Підтримати проект</a>
                             <a class="nav-item" href="/block3task8">Завдання 8 блок 3</a>
+                            <a class="nav-item" href="/VacanciesXML">VacanciesXML</a>
+                            <a class="nav-item" href="/notification">Повідомлення</a>
+                            <a class="nav-item" href="/TestXML">TestXML</a>
+                            <a class="nav-item" href="/Chat">Chat</a>
                         </div>';
         
             echo '<div class="logout-container">';
@@ -82,6 +86,7 @@ namespace pages {
                 header("Location: index.php"); // Измените index.php на путь к вашей главной странице, если нужно
             }
         }
+        
         
 
 
