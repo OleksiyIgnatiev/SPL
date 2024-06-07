@@ -528,3 +528,76 @@ button {
 .vacancy-company, .vacancy-salary, .vacancy-remote {
     margin: 5px 0;
 }
+
+/*//////////////////////////////////////*/
+.summary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.application-item {
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    width: 80%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.vacancy-description {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.worker-id {
+    font-size: 18px;
+    color: #007bff;
+}
+
+.description {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #333;
+}
+
+.creation-date {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Стили для кнопок */
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px; /* добавляем небольшой отступ между кнопками и остальным текстом */
+}
+
+.approve-button, .view-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.approve-button {
+    background-color: #28a745;
+    color: #fff;
+}
+
+.view-button {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.approve-button:hover, .view-button:hover {
+    background-color: #218838;
+}
+
