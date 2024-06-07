@@ -41,6 +41,11 @@ namespace pages {
                                 echo '<a class="nav-item" href="/Summary">Заявки</a>';
                             }
         
+                            // Проверяем тип пользователя и отображаем или скрываем пункт "Категория результат"
+                            if ($userType === 'user') {
+                                echo '<a class="nav-item" href="/Result">Результат</a>';
+                            }
+        
                             echo '
                             <a class="nav-item" href="/donat">Підтримати проект</a>
                             <a class="nav-item" href="/block3task8">Завдання 8 блок 3</a>

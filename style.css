@@ -495,7 +495,7 @@ button {
 .nav-item.active {
     font-weight: bold; /* стиль активной ссылки */
 }
-/*/////////////////////////////////*/
+/*///////////////Summary//////////////////*/
 
 .vacancy-container {
     display: flex;
@@ -529,7 +529,7 @@ button {
     margin: 5px 0;
 }
 
-/*//////////////////////////////////////*/
+/*////////////////Button//////////////////////*/
 .summary-container {
     display: flex;
     flex-direction: column;
@@ -601,3 +601,40 @@ button {
     background-color: #218838;
 }
 
+
+/*////////////////Result//////////////////////////*/
+
+.application-item2 {
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    width: 80%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.comment2 {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #333;
+    text-align: right; /* добавлено */
+}
+
+
+.creation-date2 {
+    font-size: 14px;
+    color: #777;
+}
+.left-content {
+    float: left;
+    width: 50%;
+}
+
+.right-content {
+    float: right;
+    width: 50%;
+    text-align: right;
+}

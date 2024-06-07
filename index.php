@@ -38,6 +38,9 @@ switch ($request) {
     case '/Summary':
             require __DIR__ . '/views/Summary.php';
             break;
+            case '/Result':
+                require __DIR__ . '/views/Result.php';
+                break;
     case '/Check':
         echo "Hello its login check\n";
         if (isset($_COOKIE['login'])) {
