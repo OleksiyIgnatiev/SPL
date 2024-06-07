@@ -32,9 +32,12 @@ switch ($request) {
     case '/TestXML':
         require __DIR__ . '/views/TestXML.php';
         break;
+    case '/profile':
+        require __DIR__ . '/views/profile.php';
+        break;
     case '/Check':
         echo "Hello its login check\n";
-        if(isset($_COOKIE['login'])) {
+        if (isset($_COOKIE['login'])) {
             $login = $_COOKIE['login'];
             echo "Залогиненный пользователь: $login";
         } else {

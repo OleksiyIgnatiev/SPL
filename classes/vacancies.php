@@ -46,7 +46,7 @@ namespace pages {
         public function displayBodyContent(): void
  {
 
-            echo "<div class = 'page__title'>Вакансії <button id = 'addVacancyBtn'>Додати вакансію</button></div>";
+            if($_COOKIE['type'] !== 'user')echo "<div class = 'page__title'>Вакансії <button id = 'addVacancyBtn'>Додати вакансію</button></div>";
             echo "<div class = 'vacancies__row'> ";
             foreach ( $this->vacancies as $vacancy ) {
                 echo "

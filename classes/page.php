@@ -15,6 +15,7 @@ namespace pages {
             //чтобы видеть что у нас в куки
             echo '<pre>';
             print_r($_COOKIE);
+            echo $_COOKIE['type'];
             echo '</pre>';
 
             echo '
@@ -33,17 +34,17 @@ namespace pages {
                     <a class="active" href="/">Головна</a>
                     <a href="/vacancies">Вакансії</a>
                     <a href="/donat">Підтримати проект</a>
-                    <a href="/block3task8">Завдання 8 блок 3</a>
+                   <!-- <a href="/block3task8">Завдання 8 блок 3</a>
                     <a href="/VacanciesXML">VacanciesXML</a>
                     <a href="/notification">Повідомлення</a>
                     <a href="/TestXML">TestXML</a>
-                    <a href="/Chat">Chat</a>
+                    <a href="/Chat">Chat</a> --!>
                 </div>';
 
                     echo '<div class="logout-container">';
                     if(isset($_COOKIE['login'])) {
                         $login = $_COOKIE['login'];
-                        echo "<a href=\"/Profile\">Профіль $login</a>";
+                        echo "<a href=\"/profile\">Профіль $login</a>";
                         echo "<form action=\"\" method=\"post\">
                                 <input type=\"submit\" name=\"logout\" value=\"Розлогінитися\" class=\"logout-button\">
                               </form>";

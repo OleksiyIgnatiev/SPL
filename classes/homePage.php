@@ -44,17 +44,17 @@ namespace pages
                 $creationDateString = $row[ 'creation_date' ];
 
                     // Используем регулярное выражение для извлечения даты из строки  
-                $creationDate = new DateTime( $matches[ 0 ] );
+            /*     $creationDate = new DateTime( $matches[ 0 ] ); */
 
                 // Вычисляем разницу между текущей датой и датой создания вакансии
-                $interval = $currentDate->diff( $creationDate );
+             /*    $interval = $currentDate->diff( $creationDate );
 
                 // Если разница составляет более 3 месяцев, закрываем вакансию
                 if ( $interval->m >= 3 || $interval->y > 0 ) {
                     $stmtUpdate = $this->conn->prepare( 'UPDATE vacancy SET is_closed = 1 WHERE vacancy_id = :vacancy_id' );
                     $stmtUpdate->bindValue( ':vacancy_id', $row[ 'vacancy_id' ], SQLITE3_INTEGER );
                     $stmtUpdate->execute();
-                }
+                } */
             }
         }
 
