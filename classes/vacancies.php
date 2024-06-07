@@ -10,45 +10,65 @@ namespace pages {
     require 'page.php';
 
     class VacanciesPage extends Page
- {
+    {
 
         private $database_file = 'lw1.db';
         private $conn;
         private $vacancies = [];
         private $companies = [];
-
+        private $mode;
         private function getCompanies(): void
- {
-            $result = $this->conn->query( 'SELECT company_id, name FROM company' );
-            while ( $row = $result->fetchArray( SQLITE3_ASSOC ) ) {
+        {
+            $result = $this->conn->query('SELECT company_id, name FROM company');
+            while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
                 $this->companies[] = $row;
             }
 
         }
 
         public function __construct()
- {
-            $this->conn = new SQLite3( $this->database_file );
-            /*   $this->createTableIfNeeded();
-            */
+        {
+            $this->conn = new SQLite3($this->database_file);
+
             $this->getVacancies();
             $this->getCompanies();
         }
 
         private function getVacancies(): void
- {
-            $result = $this->conn->query( 'SELECT v.*, c.name AS company_name FROM vacancy v LEFT JOIN company c ON v.company_id = c.company_id WHERE v.is_closed =0' );
-            while ( $row = $result->fetchArray( SQLITE3_ASSOC ) ) {
-                $this->vacancies[] = $row;
+        {
+            if ($_COOKIE['type'] == 'user') {
+                $result = $this->conn->query('SELECT v.*, c.name AS company_name FROM vacancy v LEFT JOIN company c ON v.company_id = c.company_id WHERE v.is_closed =0');
+                while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                    $this->vacancies[] = $row;
+                }
+            } else {
+                $company_id = $_COOKIE['company_id'];
+
+                // Подготовка и выполнение запроса с использованием параметров
+                $stmt = $this->conn->prepare('SELECT v.*, c.name AS company_name FROM vacancy v LEFT JOIN company c ON v.company_id = c.company_id WHERE v.company_id = :company_id');
+                $stmt->bindValue(':company_id', $company_id, SQLITE3_INTEGER);
+                $result = $stmt->execute();
+
+                while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                    $this->vacancies[] = $row;
+                }
+
             }
+
         }
 
-        public function displayBodyContent(): void
- {
 
-            if($_COOKIE['type'] !== 'user')echo "<div class = 'page__title'>Вакансії <button id = 'addVacancyBtn'>Додати вакансію</button></div>";
+
+        public function displayBodyContent(): void
+        {
+
+            if ($_COOKIE['type'] == 'user')
+                echo "<div class = 'page__title'>Вакансії</div>";
+            else {
+                echo "<div class = 'page__title'>Вакансії <button id = 'addVacancyBtn'>Додати вакансію</button></div>";
+            }
             echo "<div class = 'vacancies__row'> ";
-            foreach ( $this->vacancies as $vacancy ) {
+            foreach ($this->vacancies as $vacancy) {
                 echo "
             <div class = 'vacancie_wraper'>
                 <a href='/vacancie/{$vacancy['vacancy_id']}' class='vacancie'>
@@ -57,7 +77,13 @@ namespace pages {
                     <div class='vacancie__title'>   {$vacancy['company_name']}</div>
                     
                 </a>
-                <button class='deleteVacancyBtn' data-id='{$vacancy['vacancy_id']}'>Видалити</button>
+                ";
+                if ($_COOKIE['type'] !== 'user')
+                    echo "<button class='vacancie_button' data-id='{$vacancy['vacancy_id']}'>Видалити</button>";
+                if ($_COOKIE['type'] !== 'user')
+                    echo "<button class='vacancie_button' id = 'editVacancyButton'data-id='{$vacancy['vacancy_id']}'>Редагувати</button>";
+                echo "
+       
                 </div>
                 ";
             }
@@ -68,15 +94,6 @@ namespace pages {
         <div class='modal-content'>
         <div class='modal-title'>Додати вакасію</div>
             <form id='vacancyForm' action='add_vacancy.php' method='post'>
-            <div>
-            <label for='company_id'>Компанія:</label>
-            <select id='company_id' name='company_id' required>
-                <option value=''>Select a company</option>";
-            foreach ( $this->companies as $company ) {
-                echo "<option value='{$company['company_id']}'>{$company['name']}</option>";
-            }
-            echo "          </select>
-        </div>
             <div>
                 <label for='description'>Опис:</label>
                 <input id='description' name='description' required></input></div>

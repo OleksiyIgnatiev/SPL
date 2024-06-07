@@ -11,8 +11,8 @@
         // Додатковий вивід для налагодження
         error_log( print_r( $data, true ) );
 
-        if ( isset( $data[ 'company_id' ] ) && isset( $data[ 'description' ] ) ) {
-            $company_id = $data[ 'company_id' ];
+        if (  isset( $data[ 'description' ] ) ) {
+            $company_id = $_COOKIE['company_id'];
             $description = $data[ 'description' ];
             $is_remote = isset( $data[ 'is_remote' ] ) ? 1 : 0;
             $monthly_salary = $data[ 'monthly_salary' ] ?? null;
