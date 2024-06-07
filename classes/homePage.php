@@ -213,34 +213,37 @@ CREATE TABLE IF NOT EXISTS company (
 
         #[ Override ]
 
-        public function displayBodyContent(): void
- {
-            echo '
-        <body>
-            <div class="container-vacancies-info">
-                <section class="intro">
-                    <h2>Ласкаво просимо на нашу біржу праці</h2>
-                    <p>На нашій біржі праці ви можете знайти вакансії різних компаній та робочі місця, що відповідають вашим потребам та навичкам.</p>
-                </section>
-                <section class="services">
-                    <h3>Наші послуги:</h3>
-                    <ul>
-                        <li>Пошук вакансій від відомих компаній</li>
-                        <li>Підбір робочих місць відповідно до вашого досвіду та кваліфікації</li>
-                    </ul>
-                </section>
-                <section class="contact">
-                    <h3>Контакти:</h3>
-                    <p>Якщо у вас виникли питання або ви бажаєте скористатися нашими послугами, будь ласка, зв`яжіться з нами:</p>
-                    <ul>
-                        <li>Телефон: +380681239070</li>
-                        <li>Email: info@jobexchange.com</li>
-                        <li>Адреса: вул. Науки, 14, м. Харків</li>
-                    </ul>
-                </section>
-            </div>
-        </body>
-        ';
+        public function displayBodyContent(): void {
+            $stmt = $this->conn->prepare('
+                SELECT v.description, c.name AS company, v.monthly_salary, v.is_remote
+                FROM vacancy v
+                JOIN company c ON v.company_id = c.company_id
+                WHERE v.is_closed = 0
+                ORDER BY v.creation_date DESC
+                LIMIT 4
+            ');
+            $result = $stmt->execute();
+        
+            $vacancies = [];
+            while ($row = $result->fetchArray(SQLITE3_ASSOC)) {
+                $vacancies[] = $row;
+            }
+        
+            $vacancyCount = count($vacancies);
+        
+            echo '<body><div class="vacancy-container">';
+            
+            for ($i = 0; $i < $vacancyCount && $i < 4; $i++) {
+                echo '
+                <div class="vacancy-box vacancy-' . ($i + 1) . '">
+                    <h2 class="vacancy-title">' . strtoupper($vacancies[$i]['description']) . '</h2>
+                    <p class="vacancy-company">Компания: ' . $vacancies[$i]['company'] . '</p>
+                    <p class="vacancy-salary">Зарплата: $' . $vacancies[$i]['monthly_salary'] . '</p>
+                    <p class="vacancy-remote">Удаленная работа: ' . ($vacancies[$i]['is_remote'] ? 'Да' : 'Нет') . '</p>
+                </div>';
+            }
+            
+            echo '</div></body>';
         }
 
     }
