@@ -12,6 +12,11 @@ namespace pages {
 
         public function displayHeader()
         {
+            //чтобы видеть что у нас в куки
+            echo '<pre>';
+            print_r($_COOKIE);
+            echo '</pre>';
+
             echo '
             <head>
             <meta charset="UTF-8">
@@ -55,6 +60,12 @@ namespace pages {
 
             // Обработка разлогинивания
             if (isset($_POST['logout'])) {
+
+                // Удаление куки 'user_id'
+                if (isset($_COOKIE['user_id'])) {
+                    setcookie('user_id', '', time() - 3600, '/');
+                }
+
                 // Удаление куки 'login'
                 if (isset($_COOKIE['login'])) {
                     setcookie('login', '', time() - 3600, '/');

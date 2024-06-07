@@ -53,7 +53,10 @@ namespace pages {
                     echo '<p class="vacancy-info"><strong class="vacancy-label">Описание:</strong> ' . $row[ 'description' ] . '</p>';
 
                     // Закрываем контейнер
-                    echo "<button id='openPopupBtn'>Відправити заявку</button>";
+                    // Проверка куки и отображение кнопки в зависимости от типа пользователя
+                    if ($_COOKIE['type'] !== 'company') {
+                        echo "<button id='openPopupBtn'>Відправити заявку</button>";
+                    }
                     echo '</div>';
                     echo "
                     <div id='commentPopup' class='modal'>

@@ -35,9 +35,9 @@ namespace pages {
 
                     if(password_verify($password, $hash)) {
                         echo 'Данні введено правильно';
-                        setcookie('login', $fullname, time() + 86400, "/");
-                        setcookie('user_id', $user_id, time() + 86400, "/");
-                        setcookie('type', 'user', time() + 86400, "/");
+                        setcookie('login', $fullname, time() + 3600, "/");
+                        setcookie('user_id', $user_id, time() + 3600, "/");
+                        setcookie('type', 'user', time() + 3600, "/");
                         
                         header("Location: index.php");
                         exit(); // добавляем exit() после header
