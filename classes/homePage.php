@@ -158,7 +158,7 @@ namespace pages
                 FOREIGN KEY (application_id) REFERENCES application(application_id)
             );
 
-            CREATE TABLE "invitation" (
+            CREATE TABLE IF NOT EXISTS invitation (
                 "invitation_id"	INTEGER,
                 "application_id"	INTEGER NOT NULL,
                 "comment"	TEXT NOT NULL,
