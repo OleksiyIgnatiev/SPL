@@ -31,12 +31,24 @@ namespace pages {
 
         private function getUser(): void
         {
-            $stmt = $this->conn->prepare('SELECT user_id, fullname, email, password, phone_number, specialty, is_blocked, creation_date FROM user WHERE user_id = :user_id');
+            $stmt = $this->conn->prepare('SELECT user_id, fullname, email,, phone_number, specialty, is_blocked, creation_date FROM user WHERE user_id = :user_id');
             $stmt->bindValue(':user_id', $_COOKIE['user_id'], SQLITE3_INTEGER);
             $result = $stmt->execute();
     
             if ($result) {
                 $this->user = $result->fetchArray(SQLITE3_ASSOC);
+            }
+        }
+
+        
+        private function getCompany(): void 
+        {
+            $stmt = $this->conn->prepare('SELECT company_id,name, description,link,location,creation_date FROM company WHERE company_id = :company_id');
+            $stmt->bindValue(':company_id', $_COOKIE['company_id'], SQLITE3_INTEGER);
+            $result = $stmt->execute();
+    
+            if ($result) {
+                $this->company = $result->fetchArray(SQLITE3_ASSOC);
             }
         }
 
@@ -66,7 +78,13 @@ namespace pages {
 
         private function displayBodyToCompany(): void
         {
-            echo "Саша не пидор";
+            $this->getCompany();
+            echo "<div class = 'profile-page'>";
+            echo "<div class ='page__title'>Профіль компанії ".$this->company['name']."</div>";
+            echo "<div class ='text'>Опис компанії: </br>".$this->company['description']." </div>";
+            echo "<div class ='text'>Росположення компанії: <span>".$this->company['location']." </span></div>";
+            echo "<a class ='text' href='".$this->company['link']."'>Сайт компанії</a>"; 
+            echo '</div>';
         }
     }
 }

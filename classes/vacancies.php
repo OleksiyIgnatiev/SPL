@@ -44,6 +44,7 @@ namespace pages {
                 $this->vacancies[] = $row;
             }
         }
+
         public function displayBodyContent(): void
         {
             echo "<div class='page__title'>Вакансії <button id='addVacancyBtn'>Додати вакансію</button></div>";
@@ -111,7 +112,8 @@ namespace pages {
                             </div>
                             <div>
                                 <label for='language'>Мова:</label>
-                                <input type='text' id='language' name='language'>
+                               
+<input type='text' id='language' name='language'>
                             </div>
                             <div>
                                 <label for='location'>Місцезнаходження:</label>
@@ -126,9 +128,6 @@ namespace pages {
                 </div>
             ";
         }
-
-
-
     }
 }
 ?>
