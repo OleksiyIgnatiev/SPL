@@ -76,16 +76,6 @@ namespace pages {
                 echo "
        
                 </div>
-=======
-                    <div class='vacancie_wraper'>
-                        <a href='/vacancie/{$vacancy['vacancy_id']}' class='vacancie'>
-                            <div class='vacancie__title'>{$vacancy['description']}</div>
-                            <div class='vacancie__title'>{$vacancy['monthly_salary']} ₴</div>
-                            <div class='vacancie__title'>{$vacancy['company_name']}</div>
-                        </a>
-                        <button class='deleteVacancyBtn' data-id='{$vacancy['vacancy_id']}'>Видалити</button>
-                    </div>
->>>>>>> 5ae1ecf5d665abd59e09861b2cb931e9621660ec
                 ";
             }
 
