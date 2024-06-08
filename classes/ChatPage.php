@@ -12,7 +12,7 @@ namespace pages {
         private $host = "127.0.0.1";
         private $port = 20205;
 
-        
+
 
         private function getStr()
         {
@@ -44,15 +44,15 @@ namespace pages {
         {
             $dbPath = 'D:\OSPanel\domains\WorkStream\lw1.db';
             $conn = new SQLite3($dbPath);
-        
+
             $query = "SELECT sender
                       FROM message
                       WHERE sender != 'server'
                       ORDER BY creation_date DESC
                       LIMIT 1";
-        
+
             $result = $conn->querySingle($query);
-        
+
             if ($result) {
                 $conn->close();
                 return $result;
@@ -61,7 +61,7 @@ namespace pages {
                 return "";
             }
         }
-        
+
 
         public function displayBodyContent(): void
         {
@@ -81,7 +81,7 @@ namespace pages {
                     <table>
                         <tr>
                             <td>
-                            <input type="text" name="txtSender" value="<?php echo $this->getName(); ?>">
+                                <input type="text" name="txtSender" value="<?php echo $this->getName(); ?>">
                                 <label>Says that</label>
                                 <input type="text" name="txtMessage">
                                 <input type="submit" name="btnSend" value="Send">
@@ -89,6 +89,7 @@ namespace pages {
                         </tr>
                         <?php
 
+                        $text = $this->getStr();
                         if (isset($_POST['btnSend'])) {
 
                             $msg = $_REQUEST['txtSender'] . '|' . $_REQUEST['txtMessage'];
