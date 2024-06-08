@@ -41,11 +41,12 @@ namespace pages {
                     echo '<span class="vacancy-description">Vacancy: ' . htmlspecialchars($row['vacancy_description']) . '</span><br>';
                     echo '<span class="description">Description: ' . htmlspecialchars($row['description']) . '</span><br>';
                     echo '<span class="creation-date">Creation Date: ' . htmlspecialchars($row['creation_date']) . '</span><br>';
-                    echo '<div class="button-container">';
-                    echo '<button class="approve-button">Approve</button>';
+                    // Удалите следующую строку, чтобы убрать кнопку Approve
+                    // echo '<div class="button-container">';
+                    // echo '<button class="approve-button">Approve</button>';
                     // Используем тег <a> для создания ссылки и добавляем класс button для стилизации как кнопку
                     echo '<a class="view-button" href="/profileS/' . $row['application_id'] . '">View</a>';
-                    echo '</div>'; // Закрываем button-container
+                    // echo '</div>'; // Закрываем button-container
                     echo '</div>'; // Закрываем application-item
                 }
                 echo '</div>'; // Закрываем summary-container

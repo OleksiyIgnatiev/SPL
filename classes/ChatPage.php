@@ -16,7 +16,7 @@ namespace pages {
 
         private function getStr()
         {
-            $dbPath = 'D:\OSPanel\domains\WorkStream\lw1.db';
+            $dbPath = 'lw1.db';
             $conn = new SQLite3($dbPath);
 
             $query = "SELECT creation_date, sender, text FROM message";
@@ -42,7 +42,7 @@ namespace pages {
 
         private function getName()
         {
-            $dbPath = 'D:\OSPanel\domains\WorkStream\lw1.db';
+            $dbPath = 'lw1.db';
             $conn = new SQLite3($dbPath);
 
             $query = "SELECT sender
