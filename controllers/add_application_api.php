@@ -16,18 +16,32 @@ try {
         $vacancy_id = $data['vacancy_id'];
         $description = $data['description'];
 
-        $sql = "INSERT INTO application (worker_id, vacancy_id, description) VALUES (:user_id, :vacancy_id, :description)";
-
-        $stmt = $db->prepare($sql);
-        $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+        // Fetch the company_id from the vacancy table based on vacancy_id
+        $query = "SELECT company_id FROM vacancy WHERE vacancy_id = :vacancy_id";
+        $stmt = $db->prepare($query);
         $stmt->bindParam(':vacancy_id', $vacancy_id, PDO::PARAM_INT);
-        $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        $company_id = $stmt->fetchColumn();
 
-        if ($stmt->execute()) {
-            echo json_encode(['message' => 'New record created successfully']);
+        if ($company_id) {
+            // Insert into application table including company_id
+            $sql = "INSERT INTO application (worker_id, vacancy_id, description, company_id) VALUES (:user_id, :vacancy_id, :description, :company_id)";
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $stmt->bindParam(':vacancy_id', $vacancy_id, PDO::PARAM_INT);
+            $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+            $stmt->bindParam(':company_id', $company_id, PDO::PARAM_INT);
+
+            if ($stmt->execute()) {
+                echo json_encode(['message' => 'New record created successfully']);
+            } else {
+                http_response_code(500);
+                echo json_encode(['message' => 'Error creating record']);
+            }
         } else {
-            http_response_code(500);
-            echo json_encode(['message' => 'Error creating record']);
+            http_response_code(400);
+            echo json_encode(['message' => 'Invalid vacancy_id']);
         }
     } else {
         http_response_code(400);
