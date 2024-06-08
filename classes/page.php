@@ -115,49 +115,64 @@ namespace pages {
         }
 
         public function displayFooter()
-        {
-            echo '
-        <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Сайт</title>
-        <link rel="stylesheet" href="style.css">
-        </head>
-        <footer>
-        <div class="footer-wrapper">
-            <div class="footer-section">
-                <h3>Контакти</h3>
-                <p>Телефон: +380681239070</p>
-                <p>Email: info@jobexchange.com
-                </p>
-                <p>Адреса: вул. Науки, 14, м. Харків
-                </p>
-            </div>
-            <div class="footer-section">
-                <h3>Корисні посилання</h3>
-                <ul>
-                    <li><a href="#home">Головна</a></li>
-                    <li><a href="#about">Про нас</a></li>
-                    <li><a href="#contact">Контакти</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Підписатися на розсилку</h3>
-                <form action="#" method="post">
-                    <input type="email" name="email" placeholder="Електронна пошта">
-                    <button type="submit">Підписатися</button>
-                </form>
-            </div>
+{
+    // Подключаемся к базе данных SQLite
+    $db = new SQLite3('lw1.db');
+
+    // Запрос для получения количества непрочитанных сообщений
+    $unreadMessagesQuery = "SELECT COUNT(*) FROM message WHERE is_read = 0";
+    $unreadMessagesResult = $db->querySingle($unreadMessagesQuery);
+
+    // Закрываем соединение с базой данных
+    $db->close();
+
+    // Отображаем HTML с количеством непрочитанных сообщений
+    echo '
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сайт</title>
+    <link rel="stylesheet" href="style.css">
+    </head>
+    <footer>
+    <div class="footer-wrapper">
+        <div class="footer-section">
+            <h3>Контакти</h3>
+            <p>Телефон: +380681239070</p>
+            <p>Email: info@jobexchange.com
+            </p>
+            <p>Адреса: вул. Науки, 14, м. Харків
+            </p>
         </div>
-        <div class="copyright">
-            <p>&copy; 2024 WorkStream Усі права захищені.</p>
+        <div class="footer-section">
+            <h3>Корисні посилання</h3>
+            <ul>
+                <li><a href="#home">Головна</a></li>
+                <li><a href="#about">Про нас</a></li>
+                <li><a href="#contact">Контакти</a></li>
+            </ul>
         </div>
-        </footer>
-        <script src="/assets/js/vacancies.js"></script>
-        <script src="/assets/js/vacanciesInfo.js"></script>
-        <script src="/assets/js/interview.js"></script>
-        ';
-        }
+        <div class="footer-section">
+            <div class="notification-button">
+                <span class="notification-count">' . $unreadMessagesResult . '</span>
+            </div>
+            <h3>Підписатися на розсилку</h3>
+            <form action="#" method="post">
+                <input type="email" name="email" placeholder="Електронна пошта">
+                <button type="submit">Підписатися</button>
+            </form>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2024 WorkStream Усі права захищені.</p>
+    </div>
+    </footer>
+    <script src="/assets/js/vacancies.js"></script>
+    <script src="/assets/js/vacanciesInfo.js"></script>
+    <script src="/assets/js/interview.js"></script>
+    ';
+}
+
 
         protected function displayBodyContent()
         {

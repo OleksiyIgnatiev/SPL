@@ -85,7 +85,7 @@ nav a.active {
     /* White text color for active link */
 }
 
-
+/******************************************************************/
 /* Styles for footer */
 footer {
     background-color: #333;
@@ -179,7 +179,30 @@ footer {
     background-color: #444;
     /* Darken button background color on hover */
 }
+/* Стили для кнопки уведомлений */
+.notification-button {
+    position: relative;
+    /* Позиционируем элемент относительно его обычного положения */
+    cursor: pointer;
+    /* Изменяем курсор при наведении на элемент */
+}
 
+.notification-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 30px; /* Увеличиваем ширину */
+    height: 30px; /* Увеличиваем высоту */
+    font-size: 16px; /* Подбираем размер шрифта */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/******************************************************************/
 /* Styles for copyright */
 .copyright {
     text-align: center;
