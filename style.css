@@ -202,6 +202,34 @@ footer {
     align-items: center;
 }
 
+.notification-button-empty {
+    position: relative;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    background-color: #333; /* Устанавливаем черный цвет фона */
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.notification-button-empty .notification-count {
+    display: none; /* Скрываем количество сообщений */
+}
+
+.notification-button-empty img {
+    width: 30px; /* Размер иконки */
+    height: 30px;
+}
+
+
 /******************************************************************/
 /* Styles for copyright */
 .copyright {
