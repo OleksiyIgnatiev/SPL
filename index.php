@@ -26,9 +26,6 @@ switch ($request) {
     case '/block3task8':
         require __DIR__ . '/views/block3task8.php';
         break;
-    case '/notification':
-        require __DIR__ . '/views/notification.php';
-        break;
     case '/TestXML':
         require __DIR__ . '/views/TestXML.php';
         break;
