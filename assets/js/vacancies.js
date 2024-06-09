@@ -5,18 +5,49 @@ document.addEventListener('DOMContentLoaded', (event) => {
     var span = document.getElementsByClassName("close")[0];
     var closeBtn = document.getElementById("closeBtn");
     var submitBtn = document.getElementById('submitBtn');
-
+    const editVacancyBtn = document.querySelectorAll('.editVacancyBtn')
+    const buttonRow = document.querySelector('.buttonRow')
     btn.addEventListener('click', function (event) {
         event.preventDefault();
         submitBtn.dataset.mode = 'create'
         console.log(modal)
         modal.style.display = "block";
     });
+    let vacancy_id;
+    editVacancyBtn.forEach(editBtn => {
+        editBtn.addEventListener('click', function (event) {
+            event.preventDefault();
+            const jsonString = (editBtn.dataset.data);
+            console.log(jsonString)
+            const editData = JSON.parse(jsonString);
+            submitBtn.dataset.mode = 'edit'
+            vacancy_id = editData.vacancy_id
+            document.querySelector('#description').value = editData.description;
+            document.querySelector('#monthly_salary').value = editData.monthly_salary;
+            document.querySelector('#worker_competence').value = editData.worker_competence;
+            document.querySelector('#profile_requirement').value = editData.profile_requirement;
+            document.querySelector('#language').value = editData.language;
+            document.querySelector('#location').value = editData.location;
+            document.querySelector('#is_remote').checked = editData.is_remote;
+            document.querySelector('.modal-title').innerHTML = 'Змінити вакасію';
+            document.querySelector('#submitBtn').innerHTML = 'Змінити';
+            modal.style.display = "block";//
+        });
+    })
 
-    closeBtn.addEventListener('click',  ()=> {
+    closeBtn.addEventListener('click', () => {
         modal.style.display = "none";
         console.log('none')
-
+        console.log('none')
+        document.querySelector('#description').value = '';
+        document.querySelector('#monthly_salary').value = '';
+        document.querySelector('#worker_competence').value = '';
+        document.querySelector('#profile_requirement').value = '';
+        document.querySelector('#language').value = '';
+        document.querySelector('#location').value = '';
+        document.querySelector('#is_remote').checked = false;
+        document.querySelector('.modal-title').innerHTML = 'Додати вакасію';
+        document.querySelector('#submitBtn').innerHTML = 'Створити';
     });
 
     window.addEventListener('click', function (event) {
@@ -43,14 +74,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 data[key] = value;
             }
         });
-
+        
         if (!allFilled) {
             alert('Будь ласка, заповніть всі поля.');
             return;
         }
-
-        console.log('Sending data:', data);  // Виведення даних перед відправленням
-
+        data['vacancy_id'] = vacancy_id;
+        
         fetch(`/controllers/${submitBtn.dataset.mode == 'create' ? 'add_vacancy_api.php' : 'edit_vacancy_api.php'}`, {
             method: 'POST',
             headers: {
@@ -66,7 +96,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
                 console.log('Response data:', data);
                 if (data.message) {
                     alert(data.message);
-                    location.reload();  // Перезавантаження сторінки після успішного додавання
+                    location.reload();
                 } else {
                     alert('Unexpected response from server.');
                 }

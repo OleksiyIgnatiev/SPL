@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         ));
         return matches ? decodeURIComponent(matches[1]) : undefined;
     }
-
+    
     var userId = getCookie('user_id'); // Получаем user_id из куки
 
     // Обработчик для кнопки "OK"

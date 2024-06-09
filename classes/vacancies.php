@@ -12,6 +12,8 @@ namespace pages {
         private $vacancies = [];
         private $companies = [];
 
+    
+
         public function __construct($searchTerm = '')
         {
             $this->conn = new SQLite3($this->database_file);
@@ -47,31 +49,43 @@ namespace pages {
 
         public function displayBodyContent(): void
         {
-            echo "<div class='page__title'>Вакансії <button id='addVacancyBtn'>Додати вакансію</button></div>";
             $search = isset($_GET['search']) ? $_GET['search'] : '';
-
+            echo "<div class='page__title'>Вакансії";
             echo "
-                <form method='get' action='/vacancies' class='search-form'>
-                    <input type='text' name='search' placeholder='Пошук...' value='{$search}' />
-                    <button type='submit'>Пошук</button>
-                </form>
-            ";
+            <form method='get' action='/vacancies' class='search-form'>
+                <input type='text' name='search' placeholder='Пошук...' class = 'search_input' value='{$search}' />
+                <button type='submit' class = 'search_button'>Пошук</button>
+            </form>
+        ";
 
+            if (isset($_COOKIE['type']) && $_COOKIE['type'] == 'company'){
+                echo "<button id='addVacancyBtn' style =  'width: 220px' class = 'search_button'>Додати вакансію</button>";
+            }
+            echo "</div>";
+          
+          
+        
+
+          
             echo "<div class='vacancies__row'>";
 
             foreach ($this->vacancies as $vacancy) {
+                $is_company = isset($_COOKIE['type']) && $_COOKIE['type'] == 'company' &&  $_COOKIE['company_id'] == $vacancy['company_id'];
                 echo "
-            <div class = 'vacancie_wraper'>
-                <a href='/vacancie/{$vacancy['vacancy_id']}' class='vacancie'>
+           <div class='vacancie_wraper'>
+                <a href='/vacancie/{$vacancy['vacancy_id']}' class='vacancie " . ($is_company ? "vacancie_wraper_company" : "") . "'>
                     <div class='vacancie__title'> {$vacancy['description']}</div>
                     <div class='vacancie__title'> {$vacancy['monthly_salary']} ₴</div>
                     <div class='vacancie__title'>   {$vacancy['company_name']}</div>
                     
                 </a>
                 ";
-                if (isset($_COOKIE['type']) && $_COOKIE['type'] == 'company') {
+
+                if ($is_company) {
+                    echo "<button class='editVacancyBtn' data-data='".json_encode($vacancy)."'>Редагувати</button>";
                     echo "<button class='deleteVacancyBtn' data-id='{$vacancy['vacancy_id']}'>Видалити</button>";
                 }
+              
                 echo "
        
                 </div>
@@ -86,16 +100,7 @@ namespace pages {
                     <div class='modal-content'>
                         <div class='modal-title'>Додати вакасію</div>
                         <form id='vacancyForm' action='add_vacancy.php' method='post'>
-                            <div>
-                                <label for='company_id'>Компанія:</label>
-                                <select id='company_id' name='company_id' required>
-                                    <option value=''>Select a company</option>";
-            foreach ($this->companies as $company) {
-                echo "<option value='{$company['company_id']}'>{$company['name']}</option>";
-            }
-            echo "
-                                </select>
-                            </div>
+     
                             <div>
                                 <label for='description'>Опис:</label>
                                 <input id='description' name='description' required></input>
@@ -119,7 +124,7 @@ namespace pages {
                             <div>
                                 <label for='language'>Мова:</label>
                                
-<input type='text' id='language' name='language'>
+                            <input type='text' id='language' name='language'>
                             </div>
                             <div>
                                 <label for='location'>Місцезнаходження:</label>
@@ -127,13 +132,16 @@ namespace pages {
                             </div>
                         </form>
                         <div class='buttonRow'>
-                            <button type='submit' id='submitBtn'>Створити</button>
+                            <button type='submit' id='submitBtn' data-action = 'add'>Створити</button>
                             <button type='button' id='closeBtn'>Повернутись</button>
                         </div>
                     </div>
                 </div>
+                
             ";
         }
+
+      
     }
 }
 ?>

@@ -10,18 +10,15 @@ namespace pages {
     class Page
     {
 
-        public function displayHeader() {
-<<<<<<< HEAD
+        public function displayHeader()
+        {
 
-
-=======
             echo '<pre>';
             print_r($_COOKIE);
             echo '</pre>';
             // Получаем тип пользователя из куки
             $userType = isset($_COOKIE['type']) ? $_COOKIE['type'] : '';
-        
->>>>>>> 3f0200ae3a4596898d96936488894e4dd03bcdd2
+
             echo '
             <head>
                 <meta charset="UTF-8">
@@ -40,25 +37,25 @@ namespace pages {
                         <div class="navcontainer">
                             <a class="nav-item active" href="/">Головна</a>
                             <a class="nav-item" href="/vacancies">Вакансії</a>';
-                            
-                            // Проверяем тип пользователя и отображаем или скрываем пункт "Заявки"
-                            if ($userType === 'company') {
-                                echo '<a class="nav-item" href="/Summary">Заявки</a>';
-                            }
-        
-                            // Проверяем тип пользователя и отображаем или скрываем пункт "Категория результат"
-                            if ($userType === 'user') {
-                                echo '<a class="nav-item" href="/Result">Результат</a>';
-                            }
-        
-                            echo '
+
+            // Проверяем тип пользователя и отображаем или скрываем пункт "Заявки"
+            if ($userType === 'company') {
+                echo '<a class="nav-item" href="/Summary">Заявки</a>';
+            }
+
+            // Проверяем тип пользователя и отображаем или скрываем пункт "Категория результат"
+            if ($userType === 'user') {
+                echo '<a class="nav-item" href="/Result">Результат</a>';
+            }
+
+            echo '
                             <a class="nav-item" href="/donat">Підтримати проект</a>
                             <a class="nav-item" href="/block3task8">Завдання 8 блок 3</a>
                             <a class="nav-item" href="/VacanciesXML">VacanciesXML</a>
                             <a class="nav-item" href="/TestXML">TestXML</a>
                             <a class="nav-item" href="/Chat">Chat</a>
                         </div>';
-        
+
             echo '<div class="logout-container">';
             if (isset($_COOKIE['login'])) {
                 $login = $_COOKIE['login'];
@@ -71,41 +68,41 @@ namespace pages {
                       <a href="/login">Логін</a>';
             }
             echo '</div>';
-        
+
             echo '
                     </nav>
                 </div>
             </header>';
-        
+
             // Обработка разлогинивания
             if (isset($_POST['logout'])) {
                 // Удаление куки 'user_id'
                 if (isset($_COOKIE['user_id'])) {
                     setcookie('user_id', '', time() - 3600, '/');
                 }
-        
+
                 // Удаление куки 'company_id'
                 if (isset($_COOKIE['company_id'])) {
                     setcookie('company_id', '', time() - 3600, '/');
                 }
-        
+
                 // Удаление куки 'login'
                 if (isset($_COOKIE['login'])) {
                     setcookie('login', '', time() - 3600, '/');
                 }
-        
+
                 // Удаление куки 'type'
                 if (isset($_COOKIE['type'])) {
                     setcookie('type', '', time() - 3600, '/');
                 }
-        
+
                 // Перенаправление на главную страницу или любую другую страницу
                 header("Location: index.php"); // Измените index.php на путь к вашей главной странице, если нужно
             }
         }
-        
-        
-        
+
+
+
 
 
 
@@ -119,22 +116,22 @@ namespace pages {
         }
 
         public function displayFooter()
-{
-    // Подключаемся к базе данных SQLite
-    $db = new SQLite3('lw1.db');
-    
-    // Запрос для получения количества непрочитанных сообщений
-    $unreadMessagesQuery = "SELECT COUNT(*) FROM message WHERE is_read = 0";
-    $unreadMessagesResult = $db->querySingle($unreadMessagesQuery);
-    
-    // Закрываем соединение с базой данных
-    $db->close();
-    
-    // Определяем класс для кнопки уведомлений в зависимости от количества непрочитанных сообщений
-    $buttonClass = ($unreadMessagesResult == 0) ? 'notification-button-empty' : 'notification-button';
-    
-    // Отображаем HTML с количеством непрочитанных сообщений и кнопкой уведомлений
-    echo '
+        {
+            // Подключаемся к базе данных SQLite
+            $db = new SQLite3('lw1.db');
+
+            // Запрос для получения количества непрочитанных сообщений
+            $unreadMessagesQuery = "SELECT COUNT(*) FROM message WHERE is_read = 0";
+            $unreadMessagesResult = $db->querySingle($unreadMessagesQuery);
+
+            // Закрываем соединение с базой данных
+            $db->close();
+
+            // Определяем класс для кнопки уведомлений в зависимости от количества непрочитанных сообщений
+            $buttonClass = ($unreadMessagesResult == 0) ? 'notification-button-empty' : 'notification-button';
+
+            // Отображаем HTML с количеством непрочитанных сообщений и кнопкой уведомлений
+            echo '
     <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -194,7 +191,7 @@ namespace pages {
         });
     </script>
     ';
-}
+        }
 
 
 
