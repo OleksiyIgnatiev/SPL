@@ -37,14 +37,14 @@ namespace pages {
                 echo '<div class="summary-container">';
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     echo '<div class="application-item2">';
-echo '<div class="left-content">'; // контейнер для описания вакансии и даты создания
-echo '<span class="vacancy-description">Vacancy Description: ' . htmlspecialchars($row['vacancy_description']) . '</span><br>';
-echo '<span class="creation-date2">Creation Date: ' . htmlspecialchars($row['creation_date']) . '</span><br>';
-echo '</div>'; // Закрываем left-content
-echo '<div class="right-content">'; // контейнер для комментария
-echo '<span class="comment2">' . htmlspecialchars($row['comment']) . '</span><br>';
-echo '</div>'; // Закрываем right-content
-echo '</div>'; // Закрываем application-item
+                    echo '<div class="left-content">'; // контейнер для описания вакансии и даты создания
+                    echo '<span class="vacancy-description">Vacancy Description: ' . htmlspecialchars($row['vacancy_description']) . '</span><br>';
+                    echo '<span class="creation-date2">Creation Date: ' . htmlspecialchars($row['creation_date']) . '</span><br>';
+                    echo '</div>'; // Закрываем left-content
+                    echo '<div class="right-content">'; // контейнер для комментария
+                    echo '<span class="comment2">' . htmlspecialchars($row['comment']) . '</span><br>';
+                    echo '</div>'; // Закрываем right-content
+                    echo '</div>'; // Закрываем application-item
 
                 }
                 
