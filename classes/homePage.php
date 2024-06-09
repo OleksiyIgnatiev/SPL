@@ -160,12 +160,12 @@ namespace pages
 
             CREATE TABLE IF NOT EXISTS invitation (
                 invitation_id INTEGER PRIMARY KEY AUTOINCREMENT,
-    application_id INTEGER NOT NULL,
-    user_id INTEGER NOT NULL,
-    comment TEXT NOT NULL,
-    creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (application_id) REFERENCES application(application_id),
-    FOREIGN KEY (user_id) REFERENCES user(user_id)
+                application_id INTEGER NOT NULL,
+                user_id INTEGER NOT NULL,
+                comment TEXT NOT NULL,
+                creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (application_id) REFERENCES application(application_id),
+                FOREIGN KEY (user_id) REFERENCES user(user_id)
             );
 
 
