@@ -1,14 +1,10 @@
 <?php
-
 namespace pages {
-
     use SQLite3;
     use Exception;
     use DateTime;
     use PDO;
-
     require 'page.php';
-
     class testXML extends Page {
         function process_tags($tag, $content) {
             // Опрацювання тегів
@@ -49,48 +45,46 @@ namespace pages {
         private $end_tag_handlers = [
             // Додайте обробники для кінцевих тегів за необхідності
         ];
-    
-        // Функция для парсинга XML і створення HTML-таблиці
-function parseXMLAndCreateTable() {
-    // Завантаження XML-файлу
-    $xml_file = "./classes/data.xml";
-    $xml = simplexml_load_file($xml_file);
 
-    // Створення HTML-таблиці
-    $html_table = '<div class="vacancy-container">'; // Используем div вместо таблицы
+        // Функція для парсингу XML і створення HTML-таблиці
+        function parseXMLAndCreateTable() {
+            // Завантаження XML-файлу
+            $xml_file = "./classes/data.xml";
+            $xml = simplexml_load_file($xml_file);
 
-    foreach ($xml->children() as $child) {
-        // Обробка кожного елементу XML
-        $tag = $child->getName();
-        $content = (string)$child;
+            // Створення HTML-таблиці
+            $html_table = '<table>';
 
-        // Обробка тегів та текстового вмісту
-        if (isset($GLOBALS['tag_handlers'][$tag])) {
-            $content = call_user_func($GLOBALS['tag_handlers'][$tag], $tag, $content);
-        } elseif (isset($GLOBALS['end_tag_handlers'][$tag])) {
-            $content = call_user_func($GLOBALS['end_tag_handlers'][$tag], $tag, $content);
-        } elseif ($this->text_content_handler) {
-            $content = $this->{$this->text_content_handler}($content);
+            foreach ($xml->children() as $child) {
+                // Обробка кожного елементу XML
+                $tag = $child->getName();
+                $content = (string)$child;
+
+                // Обробка тегів та текстового вмісту
+                if (isset($GLOBALS['tag_handlers'][$tag])) {
+                    $content = call_user_func($GLOBALS['tag_handlers'][$tag], $tag, $content);
+                } elseif (isset($GLOBALS['end_tag_handlers'][$tag])) {
+                    $content = call_user_func($GLOBALS['end_tag_handlers'][$tag], $tag, $content);
+                } elseif ($this->text_content_handler) {
+                    $content = $this->{$this->text_content_handler}($content);
+
+                }
+
+
+                // Додавання до HTML-таблиці
+                $html_table .= "<tr><td>$tag</td><td>$content</td></tr>";
+            }
+
+            $html_table .= '</table>';
+
+            // Виведення HTML-таблиці
+            echo $html_table;
         }
-
-        // Додавання до HTML-контейнера
-        $html_table .= '<div class="vacancy-box">';
-        $html_table .= "<h2>$tag</h2>"; // Имя тега как заголовок
-        $html_table .= "<p>$content</p>"; // Содержимое тега
-        $html_table .= '</div>';
-    }
-
-    $html_table .= '</div>'; // Закрываем контейнер
-
-    // Виведення HTML-контейнера
-    echo $html_table;
-}
 
         public function displayBodyContent(): void {
             $this->parseXMLAndCreateTable();
-            
+
         }
     }
-
 }
 ?>
