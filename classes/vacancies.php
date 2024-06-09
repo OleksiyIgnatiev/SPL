@@ -48,11 +48,11 @@ namespace pages {
         public function displayBodyContent(): void
         {
             echo "<div class='page__title'>Вакансії <button id='addVacancyBtn'>Додати вакансію</button></div>";
+            $search = isset($_GET['search']) ? $_GET['search'] : '';
 
-            // Форма поиска вакансий
             echo "
                 <form method='get' action='/vacancies' class='search-form'>
-                    <input type='text' name='search' placeholder='Пошук...' value='{$_GET['search']}' />
+                    <input type='text' name='search' placeholder='Пошук...' value='{$search}' />
                     <button type='submit'>Пошук</button>
                 </form>
             ";
@@ -61,7 +61,6 @@ namespace pages {
 
             foreach ($this->vacancies as $vacancy) {
                 echo "
-<<<<<<< HEAD
             <div class = 'vacancie_wraper'>
                 <a href='/vacancie/{$vacancy['vacancy_id']}' class='vacancie'>
                     <div class='vacancie__title'> {$vacancy['description']}</div>
@@ -76,16 +75,6 @@ namespace pages {
                 echo "
        
                 </div>
-=======
-                    <div class='vacancie_wraper'>
-                        <a href='/vacancie/{$vacancy['vacancy_id']}' class='vacancie'>
-                            <div class='vacancie__title'>{$vacancy['description']}</div>
-                            <div class='vacancie__title'>{$vacancy['monthly_salary']} ₴</div>
-                            <div class='vacancie__title'>{$vacancy['company_name']}</div>
-                        </a>
-                        <button class='deleteVacancyBtn' data-id='{$vacancy['vacancy_id']}'>Видалити</button>
-                    </div>
->>>>>>> 5ae1ecf5d665abd59e09861b2cb931e9621660ec
                 ";
             }
 

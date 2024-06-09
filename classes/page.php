@@ -11,11 +11,8 @@ namespace pages {
     {
 
         public function displayHeader() {
-            //чтобы видеть что у нас в куки
-            echo '<pre>';
-            print_r($_COOKIE);
-            echo '</pre>';
-        
+
+
             echo '
             <head>
             <meta charset="UTF-8">
@@ -27,7 +24,7 @@ namespace pages {
                 <div class="header-content">
                     <div class="wrap-logo">
                         <a href="/" class="logo">
-                            <img src="assets/images/Логотип_ДСЗУ.png" alt="WorkStream Logo">
+                            <img src="/assets/images/Логотип_ДСЗУ.png" alt="WorkStream Logo">
                         </a>
                     </div>
                     <nav>

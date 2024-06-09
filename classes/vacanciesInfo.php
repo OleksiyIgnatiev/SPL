@@ -47,8 +47,8 @@ namespace pages {
                     echo '<h1 class="vacancy-title">' . $row[ 'description' ] . '</h1>';
                     echo '<p class="vacancy-info"><strong class="vacancy-label">Работодатель:</strong> ' . $row[ 'company_name' ] . '</p>';
                     echo '<p class="vacancy-info"><strong class="vacancy-label">Зарплата:</strong> ' . $row[ 'monthly_salary' ] . '</p>';
-                    echo '<p class="vacancy-info"><strong class="vacancy-label">Часы работы:</strong> ' . $row[ 'opening_hours' ] . '</p>';
-                    echo '<p class="vacancy-info"><strong class="vacancy-label">Место работы:</strong> ' . $row[ 'location' ] . '</p>';
+                    echo '<p class="vacancy-info"><strong class="vacancy-label">Компетенсії:</strong> ' . $row[ 'worker_competence' ] . '</p>';
+                    echo '<p class="vacancy-info"><strong class="vacancy-label">Вимога до профілю:</strong> ' . $row[ 'profile_requirement' ] . '</p>';
                     echo '<p class="vacancy-info"><strong class="vacancy-label">Возможность удалённой работы:</strong> ' . ( $row[ 'is_remote' ] ? 'Да' : 'Нет' ) . '</p>';
                     echo '<p class="vacancy-info"><strong class="vacancy-label">Описание:</strong> ' . $row[ 'description' ] . '</p>';
 
@@ -79,8 +79,6 @@ namespace pages {
 
                     
                     
-                    // Додавання поточного часу в кінець файлу
-                    echo '<p>Поточний час: ' . date( 'Y-m-d H:i:s' ) . '</p>';
                 } else {
                     echo 'Вакансия не найдена';
                 }
