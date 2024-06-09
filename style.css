@@ -699,3 +699,47 @@ button {
 }
 
 
+/******************************TestXML*************************************/
+/* Основные стили для таблицы */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    margin: 20px 0;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+
+/* Стили для строк таблицы */
+.custom-row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.custom-row:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* Стили для ячеек таблицы */
+.custom-cell {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+    text-align: left;
+}
+
+/* Специальные стили для ячеек с тегами */
+.tag-cell {
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
+
+/* Специальные стили для ячеек с контентом */
+.content-cell {
+    color: #333333;
+}
+
+/* Стили для заголовка таблицы (если есть) */
+.custom-table thead th {
+    background-color: #333333;
+    color: #ffffff;
+    text-align: left;
+    padding: 12px 15px;
+}
