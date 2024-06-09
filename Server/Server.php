@@ -33,7 +33,7 @@ do {
     $msgText = $words[1];
 
     // Безопасное подключение к базе данных и выполнение запроса
-    $dbPath = 'D:\OSPanel\domains\WorkStream\lw1.db';
+    $dbPath = 'C:\OSPanel\home\SPL\lw1.db';
     $conn = new SQLite3($dbPath);
     if (!$conn) {
         die("Connection failed: Unable to open database.");

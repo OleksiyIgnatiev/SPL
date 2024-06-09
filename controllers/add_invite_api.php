@@ -15,17 +15,31 @@ try {
         $application_id = $data['application_id'];
         $comment = $data['comment'];
 
-        $sql = "INSERT INTO invitation (application_id, comment) VALUES (:application_id, :comment)";
-
-        $stmt = $db->prepare($sql);
+        // Fetch the user_id from the application table based on application_id
+        $query = "SELECT worker_id AS user_id FROM application WHERE application_id = :application_id";
+        $stmt = $db->prepare($query);
         $stmt->bindParam(':application_id', $application_id, PDO::PARAM_INT);
-        $stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        $user_id = $stmt->fetchColumn();
 
-        if ($stmt->execute()) {
-            echo json_encode(['message' => 'New record created successfully']);
+        if ($user_id) {
+            // Insert into invitation table including user_id
+            $sql = "INSERT INTO invitation (application_id, comment, user_id) VALUES (:application_id, :comment, :user_id)";
+            $stmt = $db->prepare($sql);
+            $stmt->bindParam(':application_id', $application_id, PDO::PARAM_INT);
+            $stmt->bindParam(':comment', $comment, PDO::PARAM_STR);
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+
+            if ($stmt->execute()) {
+                echo json_encode(['message' => 'New record created successfully']);
+            } else {
+                http_response_code(500);
+                echo json_encode(['message' => 'Error creating record']);
+            }
         } else {
-            http_response_code(500);
-            echo json_encode(['message' => 'Error creating record']);
+            http_response_code(400);
+            echo json_encode(['message' => 'Invalid application_id']);
         }
     } else {
         http_response_code(400);

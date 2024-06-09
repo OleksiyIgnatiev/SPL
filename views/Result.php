@@ -1,10 +1,10 @@
 <?php
 namespace views {
-    require './classes/notification.php';
+    require './classes/Result.php';
 
-    use pages\notification;
+    use pages\Result;
 
-    $vac = new notification();
+    $vac = new Result();
     $vac->displayHeader();
     $vac->displayBody();
     $vac->displayFooter();

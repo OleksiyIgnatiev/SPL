@@ -85,7 +85,7 @@ nav a.active {
     /* White text color for active link */
 }
 
-
+/******************************************************************/
 /* Styles for footer */
 footer {
     background-color: #333;
@@ -179,7 +179,58 @@ footer {
     background-color: #444;
     /* Darken button background color on hover */
 }
+/* Стили для кнопки уведомлений */
+.notification-button {
+    position: relative;
+    /* Позиционируем элемент относительно его обычного положения */
+    cursor: pointer;
+    /* Изменяем курсор при наведении на элемент */
+}
 
+.notification-count {
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    width: 30px; /* Увеличиваем ширину */
+    height: 30px; /* Увеличиваем высоту */
+    font-size: 16px; /* Подбираем размер шрифта */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.notification-button-empty {
+    position: relative;
+    cursor: pointer;
+    top: 0;
+    right: 0;
+    background-color: #333; /* Устанавливаем черный цвет фона */
+    color: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.notification-button-empty .notification-count {
+    display: none; /* Скрываем количество сообщений */
+}
+
+.notification-button-empty img {
+    width: 30px; /* Размер иконки */
+    height: 30px;
+}
+
+
+/******************************************************************/
 /* Styles for copyright */
 .copyright {
     text-align: center;
@@ -495,7 +546,7 @@ button {
 .nav-item.active {
     font-weight: bold; /* стиль активной ссылки */
 }
-/*/////////////////////////////////*/
+/*///////////////Summary//////////////////*/
 
 .vacancy-container {
     display: flex;
@@ -527,4 +578,168 @@ button {
 
 .vacancy-company, .vacancy-salary, .vacancy-remote {
     margin: 5px 0;
+}
+
+/*////////////////Button//////////////////////*/
+.summary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.application-item {
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    width: 80%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.vacancy-description {
+    font-size: 20px;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.worker-id {
+    font-size: 18px;
+    color: #007bff;
+}
+
+.description {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #333;
+}
+
+.creation-date {
+    font-size: 14px;
+    color: #777;
+}
+
+/* Стили для кнопок */
+.button-container {
+    display: flex;
+    justify-content: flex-end; /* Расположение кнопки в правой части */
+    align-items: center;
+    margin-top: 10px; /* добавляем небольшой отступ между кнопками и остальным текстом */
+}
+
+.view-button {
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #007bff;
+    color: #fff;
+}
+
+.view-button:hover {
+    background-color: #218838;
+}
+
+/*////////////////Result//////////////////////////*/
+
+.application-item2 {
+    border: 2px solid #007bff;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    width: 80%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+.comment2 {
+    margin-top: 15px;
+    font-size: 16px;
+    color: #333;
+    text-align: right; /* добавлено */
+}
+
+
+.creation-date2 {
+    font-size: 14px;
+    color: #777;
+}
+.left-content {
+    float: left;
+    width: 50%;
+}
+
+.right-content {
+    float: right;
+    width: 50%;
+    text-align: right;
+}
+/****************************************************************/
+/* Стили для кнопки пометки всех сообщений как прочитанных */
+/* Стили для кнопки пометки всех сообщений как прочитанных */
+.mark-read-btn {
+    background-color: #4CAF50; /* Зеленый цвет */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+    float: right; /* Располагаем кнопку справа */
+}
+
+
+/******************************TestXML*************************************/
+/* Основные стили для таблицы */
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    margin: 20px 0;
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+
+/* Стили для строк таблицы */
+.custom-row:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.custom-row:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+/* Стили для ячеек таблицы */
+.custom-cell {
+    padding: 12px 15px;
+    border: 1px solid #dddddd;
+    text-align: left;
+}
+
+/* Специальные стили для ячеек с тегами */
+.tag-cell {
+    font-weight: bold;
+    background-color: #f2f2f2;
+}
+
+/* Специальные стили для ячеек с контентом */
+.content-cell {
+    color: #333333;
+}
+
+/* Стили для заголовка таблицы (если есть) */
+.custom-table thead th {
+    background-color: #333333;
+    color: #ffffff;
+    text-align: left;
+    padding: 12px 15px;
 }

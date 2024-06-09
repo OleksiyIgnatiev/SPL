@@ -99,7 +99,7 @@ namespace pages
 
         private function createTables(): void {
             $this->conn->exec( '
-CREATE TABLE IF NOT EXISTS company (
+            CREATE TABLE IF NOT EXISTS company (
                 company_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 name VARCHAR(255) NOT NULL,
                 password VARCHAR(255) NOT NULL,
@@ -137,13 +137,15 @@ CREATE TABLE IF NOT EXISTS company (
             );
 
             CREATE TABLE IF NOT EXISTS application (
-                application_id INT PRIMARY KEY,
+                application_id INTEGER PRIMARY KEY AUTOINCREMENT,
                 worker_id INT NOT NULL,
                 vacancy_id INT NOT NULL,
+                company_id INT NOT NULL,
                 description TEXT,
                 creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (worker_id) REFERENCES user(user_id),
-                FOREIGN KEY (vacancy_id) REFERENCES vacancy(vacancy_id)
+                FOREIGN KEY (worker_id) REFERENCES user (user_id),
+                FOREIGN KEY (vacancy_id) REFERENCES vacancy (vacancy_id),
+                FOREIGN KEY (company_id) REFERENCES company (company_id)
             );
 
             CREATE TABLE IF NOT EXISTS message (
@@ -155,53 +157,66 @@ CREATE TABLE IF NOT EXISTS company (
                 creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
                 FOREIGN KEY (application_id) REFERENCES application(application_id)
             );
+
+            CREATE TABLE IF NOT EXISTS invitation (
+                invitation_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    application_id INTEGER NOT NULL,
+    user_id INTEGER NOT NULL,
+    comment TEXT NOT NULL,
+    creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (application_id) REFERENCES application(application_id),
+    FOREIGN KEY (user_id) REFERENCES user(user_id)
+            );
+
+
         ' );
         }
 
         private function populateTables(): void {
             if ( $this->isTableEmpty( 'company' ) ) {
                 $this->conn->exec( '
-            INSERT INTO company (name, description, link, location, password) VALUES
-            ("Tech Solutions", "Innovative tech company", "http://techsolutions.com", "New York, NY", "aaa"),
-            ("HealthCorp", "Healthcare services provider", "http://healthcorp.com", "San Francisco, CA", "bbb"),
-            ("EduLearn", "Educational platform", "http://edulearn.com", "Austin, TX", "ccc");
-        ' );
+                INSERT INTO company (name, description, link, location, password) VALUES
+                ("Tech Solutions", "Innovative tech company", "http://techsolutions.com", "New York, NY", "aaa"),
+                ("HealthCorp", "Healthcare services provider", "http://healthcorp.com", "San Francisco, CA", "bbb"),
+                ("EduLearn", "Educational platform", "http://edulearn.com", "Austin, TX", "ccc");
+            ' );
             }
 
             if ( $this->isTableEmpty( 'vacancy' ) ) {
                 $this->conn->exec( '
-            INSERT INTO vacancy (company_id, description, is_remote, monthly_salary, worker_competence, profile_requirement, language) VALUES
-            (1, "Software Engineer", 1, 8000.00, "JavaScript, React", "3+ years experience in frontend development", "English"),
-            (2, "Data Analyst", 0, 6000.00, "SQL, Python", "2+ years experience in data analysis", "English"),
-            (3, "Content Writer", 1, 3000.00, "SEO, Content Creation", "1+ year experience in content writing", "English");
-        ' );
+                INSERT INTO vacancy (company_id, description, is_remote, monthly_salary, worker_competence, profile_requirement, language) VALUES
+                (1, "Software Engineer", 1, 8000.00, "JavaScript, React", "3+ years experience in frontend development", "English"),
+                (2, "Data Analyst", 0, 6000.00, "SQL, Python", "2+ years experience in data analysis", "English"),
+                (3, "Content Writer", 1, 3000.00, "SEO, Content Creation", "1+ year experience in content writing", "English");
+            ' );
             }
 
             if ( $this->isTableEmpty( 'user' ) ) {
                 $this->conn->exec( '
-            INSERT INTO user (fullname, email, phone_number, specialty, password) VALUES
-            ("John Doe", "john.doe@example.com", "123-456-7890", 1, "aaa"),
-            ("Jane Smith", "jane.smith@example.com", "234-567-8901", 2, "bbb"),
-            ("Emily Johnson", "emily.johnson@example.com", "345-678-9012", 3, "ccc");
-        ' );
+                INSERT INTO user (fullname, email, phone_number, specialty, password) VALUES
+                ("John Doe", "john.doe@example.com", "123-456-7890", 1, "aaa"),
+                ("Jane Smith", "jane.smith@example.com", "234-567-8901", 2, "bbb"),
+                ("Emily Johnson", "emily.johnson@example.com", "345-678-9012", 3, "ccc");
+            ' );
             }
 
-            if ( $this->isTableEmpty( 'application' ) ) {
-                $this->conn->exec( '
-            INSERT INTO application (application_id, worker_id, vacancy_id, description) VALUES
-            (1, 1, 1, "I am very interested in this software engineer position."),
-            (2, 2, 2, "Looking forward to contributing my data analysis skills to your company."),
-            (3, 3, 3, "I have a passion for writing and believe I would be a great fit for this role.");
-        ' );
+            if ($this->isTableEmpty('application')) {
+                $this->conn->exec('
+                    INSERT INTO application (application_id, worker_id, vacancy_id, company_id, description) VALUES
+                    (1, 1, 1, 1, "I am very interested in this software engineer position."),
+                    (2, 2, 2, 1, "Looking forward to contributing my data analysis skills to your company."),
+                    (3, 3, 3, 1, "I have a passion for writing and believe I would be a great fit for this role.");
+                ');
+            
             }
 
             if ( $this->isTableEmpty( 'message' ) ) {
                 $this->conn->exec( '
-            INSERT INTO message (message_id, application_id, text, sender) VALUES
-            (1, 1, "Thank you for applying. We will review your application.", "HR Manager"),
-            (2, 2, "Your application is under consideration.", "HR Manager"),
-            (3, 3, "We received your application. Thank you!", "HR Manager");
-        ' );
+                INSERT INTO message (message_id, application_id, text, sender) VALUES
+                (1, 1, "Thank you for applying. We will review your application.", "HR Manager"),
+                (2, 2, "Your application is under consideration.", "HR Manager"),
+                (3, 3, "We received your application. Thank you!", "HR Manager");
+            ' );
             }
         }
 

@@ -12,11 +12,9 @@ namespace pages {
         private $host = "127.0.0.1";
         private $port = 20205;
 
-        
-
         private function getStr()
         {
-            $dbPath = 'D:\OSPanel\domains\WorkStream\lw1.db';
+            $dbPath = 'lw1.db';
             $conn = new SQLite3($dbPath);
 
             $query = "SELECT creation_date, sender, text FROM message";
@@ -42,17 +40,17 @@ namespace pages {
 
         private function getName()
         {
-            $dbPath = 'D:\OSPanel\domains\WorkStream\lw1.db';
+            $dbPath = 'lw1.db';
             $conn = new SQLite3($dbPath);
-        
+
             $query = "SELECT sender
                       FROM message
                       WHERE sender != 'server'
                       ORDER BY creation_date DESC
                       LIMIT 1";
-        
+
             $result = $conn->querySingle($query);
-        
+
             if ($result) {
                 $conn->close();
                 return $result;
@@ -61,7 +59,6 @@ namespace pages {
                 return "";
             }
         }
-        
 
         public function displayBodyContent(): void
         {
@@ -78,17 +75,25 @@ namespace pages {
                 <div align="center"></div>
 
                 <form method="post" action="">
-                    <table>
-                        <tr>
-                            <td>
-                            <input type="text" name="txtSender" value="<?php echo $this->getName(); ?>">
-                                <label>Says that</label>
-                                <input type="text" name="txtMessage">
-                                <input type="submit" name="btnSend" value="Send">
-                            </td>
-                        </tr>
+    <table>
+        <tr>
+            <td>
+                <input type="text" name="txtSender" value="<?php echo $this->getName(); ?>">
+                <label>Says that</label>
+                <input type="text" name="txtMessage">
+                <input type="submit" name="btnSend" value="Send">
+            </td>
+        </tr>
+        <!-- Кнопка для пометки всех сообщений как прочитанных -->
+        <tr>
+            <td>
+            <input type="submit" name="btnMarkAllRead" value="Mark All As Read" class="mark-read-btn">
+            </td>
+        </tr>
+
                         <?php
 
+                        $text = $this->getStr();
                         if (isset($_POST['btnSend'])) {
 
                             $msg = $_REQUEST['txtSender'] . '|' . $_REQUEST['txtMessage'];
@@ -103,8 +108,24 @@ namespace pages {
                             socket_close($sock);
 
                             $text = $this->getStr();
+                        }
 
+                        // Обработчик кнопки "Mark All As Read"
+                        if (isset($_POST['btnMarkAllRead'])) {
+                            $dbPath = 'lw1.db';
+                            $conn = new SQLite3($dbPath);
 
+                            $query = "UPDATE message SET is_read = 1";
+
+                            $result = $conn->exec($query);
+
+                            if ($result) {
+                                echo "All messages marked as read successfully.";
+                            } else {
+                                echo "Error marking messages as read: " . $conn->lastErrorMsg();
+                            }
+
+                            $conn->close();
                         }
                         ?>
                         <tr>
